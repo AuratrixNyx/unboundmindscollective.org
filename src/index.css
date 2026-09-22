@@ -1,5 +1,17 @@
 @import "tailwindcss";
-
-/* Theme customization lives in tailwind.config.js, bridged in via @config.
-   (You can also define theme tokens directly here with @theme { ... }.) */
 @config "../tailwind.config.cjs";
+
+body {
+  font-family: 'Jost', system-ui, sans-serif;
+  background: #1a1614;
+  color: #f0ebe5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus-visible {
+  outline: 2px solid #c4956a;
+  outline-offset: 2px;
+}

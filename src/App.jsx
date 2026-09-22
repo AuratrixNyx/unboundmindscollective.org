@@ -1,38 +1,37 @@
-import { Globe } from "lucide-react";
-import { Slot } from "@radix-ui/react-slot";
-import { twMerge } from "tailwind-merge";
+import { Routes, Route } from "react-router";
+import SiteLayout from "./layouts/SiteLayout.jsx";
+import Home from "./pages/Home.jsx";
+import Community from "./pages/Community.jsx";
+import Resources from "./pages/Resources.jsx";
+import Sessions from "./pages/Sessions.jsx";
+import Profile from "./pages/Profile.jsx";
+import Auth from "./pages/Auth.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import FacilitatorConsole from "./pages/FacilitatorConsole.jsx";
+import AIGuide from "./pages/AIGuide.jsx";
+import SuggestionBox from "./pages/SuggestionBox.jsx";
+import FacilitatorSpotlight from "./pages/FacilitatorSpotlight.jsx";
+import CrisisResources from "./pages/CrisisResources.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
-function Button({ className, asChild = false, variant = "primary", ...props }) {
-  const Comp = asChild ? Slot : "button";
+export default function App() {
   return (
-    <Comp
-      className={twMerge(
-        "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-        "disabled:pointer-events-none disabled:opacity-50",
-        variant === "primary" && "bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-600",
-        variant === "outline" && "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus-visible:ring-gray-400",
-        className
-      )}
-      {...props}
-    />
+    <Routes>
+      <Route element={<SiteLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/sessions" element={<Sessions />} />
+        <Route path="/ai-guide" element={<AIGuide />} />
+        <Route path="/suggestion-box" element={<SuggestionBox />} />
+        <Route path="/facilitators" element={<FacilitatorSpotlight />} />
+        <Route path="/crisis" element={<CrisisResources />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/facilitator-console" element={<FacilitatorConsole />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
-
-function App() {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 flex items-center justify-center px-4">
-      <div className="text-center">
-        <Globe className="w-10 h-10 mx-auto text-gray-400 dark:text-gray-600" strokeWidth={1.5} />
-        <h1 className="mt-6 text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
-          We're setting up your site
-        </h1>
-        <p className="mt-2 text-sm text-gray-400 dark:text-gray-500">
-          This won't take long.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-export default App;
