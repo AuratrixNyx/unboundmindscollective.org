@@ -43,56 +43,11 @@ export default function SiteLayout() {
 
   const isElevated = user && ['moderator', 'facilitator', 'guest_facilitator', 'admin'].includes(user.role);
 
-  const handleQuickExit = (e) => {
-    if (e) e.preventDefault();
-    try { window.location.replace('https://www.google.com'); } catch (_) {}
-    try { window.location.href = 'https://www.google.com'; } catch (_) {}
-  };
 
-  // Escape key pressed twice quickly also triggers exit
-  useEffect(() => {
-    let lastEsc = 0;
-    const onKey = (e) => {
-      if (e.key === 'Escape') {
-        const now = Date.now();
-        if (now - lastEsc < 800) handleQuickExit();
-        lastEsc = now;
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-bg text-text-primary font-body">
       <WelcomeModal />
-
-      {/* Quick Exit Button — always visible, fixed position, impossible to miss */}
-      <a
-        href="https://www.google.com"
-        onClick={handleQuickExit}
-        aria-label="Quick exit — leave this site immediately"
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          zIndex: 99999,
-          backgroundColor: '#1e1714',
-          color: '#f5f0eb',
-          fontSize: '11px',
-          fontWeight: '700',
-          padding: '8px 16px',
-          borderRadius: '4px',
-          textDecoration: 'none',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
-          letterSpacing: '0.05em',
-          textTransform: 'uppercase',
-          display: 'block',
-          lineHeight: '1.2',
-        }}
-      >
-        Quick Exit
-      </a>
 
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-surface border-b border-border">

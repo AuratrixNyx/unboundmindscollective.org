@@ -8,6 +8,7 @@ export default function Auth() {
   const [form, setForm] = useState({ displayName: '', email: '', password: '', confirmPassword: '', inviteCode: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -120,6 +121,29 @@ export default function Auth() {
             )}
 
             {tab === 'login' ? (
+              showForgot ? (
+                <div className="space-y-4">
+                  <div className="p-4 bg-accent/10 border border-accent/30 rounded-sm">
+                    <p className="text-text-primary text-sm font-medium mb-2">Need to reset your password?</p>
+                    <p className="text-text-secondary text-sm leading-relaxed">
+                      Password resets are handled by our team. Please reach out and we'll get you back in as quickly as possible.
+                    </p>
+                    <a
+                      href="mailto:amber@unboundmindscollective.org?subject=Password%20Reset%20Request"
+                      className="inline-block mt-3 text-sm font-medium text-accent hover:text-accent-hover underline"
+                    >
+                      Email amber@unboundmindscollective.org
+                    </a>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowForgot(false)}
+                    className="w-full py-3 bg-raised border border-border text-text-secondary font-medium rounded-sm hover:bg-border transition-colors text-sm"
+                  >
+                    Back to Sign In
+                  </button>
+                </div>
+              ) : (
               <form onSubmit={handleLogin} className="space-y-4">
                 <div>
                   <label htmlFor="login-email" className="block text-sm text-text-secondary mb-1.5">Email</label>
@@ -128,7 +152,16 @@ export default function Auth() {
                     placeholder="your@email.com" />
                 </div>
                 <div>
-                  <label htmlFor="login-password" className="block text-sm text-text-secondary mb-1.5">Password</label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor="login-password" className="block text-sm text-text-secondary">Password</label>
+                    <button
+                      type="button"
+                      onClick={() => setShowForgot(true)}
+                      className="text-xs text-accent hover:text-accent-hover underline"
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
                   <input id="login-password" type="password" required value={form.password} onChange={set('password')}
                     className="w-full bg-raised border border-border rounded-sm px-3 py-2.5 text-text-primary text-sm focus:border-accent transition-colors outline-hidden"
                     placeholder="••••••••" />
@@ -142,6 +175,7 @@ export default function Auth() {
                   <button type="button" onClick={() => setTab('signup')} className="text-accent hover:text-accent-hover underline">Create one here</button>
                 </p>
               </form>
+              )
             ) : (
               <form onSubmit={handleSignup} className="space-y-4">
                 <div>

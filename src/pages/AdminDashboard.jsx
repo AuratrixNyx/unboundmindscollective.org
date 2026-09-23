@@ -28,6 +28,11 @@ export default function AdminDashboard() {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Password reset modal
+  const [resetTarget, setResetTarget] = useState(null); // { id, name }
+  const [resetPw, setResetPw] = useState('');
+  const [resetMsg, setResetMsg] = useState('');
+
   // Invite code form
   const [newCode, setNewCode] = useState({ code: '', role_grant: 'moderator' });
   const [codeSuccess, setCodeSuccess] = useState(false);
@@ -77,6 +82,19 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => { fetchTab(tab); }, [tab]);
+
+  const handleResetPassword = async () => {
+    if (!resetPw || resetPw.length < 8) { setResetMsg('Password must be at least 8 characters.'); return; }
+    try {
+      await pb.collection('members').update(resetTarget.id, { password: resetPw, passwordConfirm: resetPw });
+      await pb.collection('audit_log').create({ action: 'password_reset', target_id: resetTarget.id, performed_by: user.id, new_value: 'reset' });
+      setResetMsg('');
+      setResetTarget(null);
+      setResetPw('');
+    } catch (e) {
+      setResetMsg(e?.data?.message || 'Could not reset password. Please try again.');
+    }
+  };
 
   const changeRole = async (memberId, role) => {
     try {
@@ -188,13 +206,17 @@ export default function AdminDashboard() {
                   </td>
                   <td className="py-3 pr-4 text-text-muted">{formatDate(m.created)}</td>
                   <td className="py-3">
-                    <div className="flex gap-1">
+                    <div className="flex flex-wrap gap-1">
                       {['warn', 'timeout', 'ban'].map(action => (
                         <button key={action} onClick={() => memberAction(m.id, action)}
                           className="px-2 py-1 text-xs rounded-sm bg-raised border border-border text-text-muted hover:text-danger hover:border-danger/30 transition-colors capitalize">
                           {action}
                         </button>
                       ))}
+                      <button onClick={() => { setResetTarget({ id: m.id, name: m.display_name || m.name }); setResetPw(''); setResetMsg(''); }}
+                        className="px-2 py-1 text-xs rounded-sm bg-raised border border-border text-text-muted hover:text-accent hover:border-accent/30 transition-colors">
+                        Reset PW
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -383,6 +405,36 @@ export default function AdminDashboard() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Reset Password Modal */}
+      {resetTarget && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/40" role="dialog" aria-modal="true" aria-labelledby="reset-pw-title">
+          <div className="bg-surface border border-border rounded-sm shadow-sm w-full max-w-sm p-6">
+            <h2 id="reset-pw-title" className="font-display text-xl font-semibold text-text-primary mb-1">Reset Password</h2>
+            <p className="text-text-secondary text-sm mb-4">Set a new password for <strong>{resetTarget.name}</strong>. They'll need to use this to sign in.</p>
+            {resetMsg && <p className="mb-3 text-danger text-sm">{resetMsg}</p>}
+            <label htmlFor="reset-pw-input" className="block text-sm text-text-secondary mb-1.5">New Password</label>
+            <input
+              id="reset-pw-input"
+              type="text"
+              value={resetPw}
+              onChange={e => setResetPw(e.target.value)}
+              placeholder="Minimum 8 characters"
+              className="w-full bg-raised border border-border rounded-sm px-3 py-2.5 text-text-primary text-sm focus:border-accent transition-colors outline-hidden mb-4"
+            />
+            <div className="flex gap-2">
+              <button onClick={handleResetPassword}
+                className="flex-1 py-2.5 bg-accent text-bg text-sm font-medium rounded-sm hover:bg-accent-hover transition-colors">
+                Set Password
+              </button>
+              <button onClick={() => { setResetTarget(null); setResetPw(''); setResetMsg(''); }}
+                className="flex-1 py-2.5 bg-raised border border-border text-text-secondary text-sm rounded-sm hover:bg-border transition-colors">
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
