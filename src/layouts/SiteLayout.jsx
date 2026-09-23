@@ -43,9 +43,25 @@ export default function SiteLayout() {
 
   const isElevated = user && ['moderator', 'facilitator', 'guest_facilitator', 'admin'].includes(user.role);
 
-  const handleQuickExit = () => {
-    window.location.href = 'https://www.google.com';
+  const handleQuickExit = (e) => {
+    if (e) e.preventDefault();
+    try { window.location.replace('https://www.google.com'); } catch (_) {}
+    try { window.location.href = 'https://www.google.com'; } catch (_) {}
   };
+
+  // Escape key pressed twice quickly also triggers exit
+  useEffect(() => {
+    let lastEsc = 0;
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        const now = Date.now();
+        if (now - lastEsc < 800) handleQuickExit();
+        lastEsc = now;
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-bg text-text-primary font-body">
@@ -54,6 +70,7 @@ export default function SiteLayout() {
       {/* Quick Exit Button — always visible, fixed position */}
       <a
         href="https://www.google.com"
+        onClick={handleQuickExit}
         aria-label="Quick exit — leave this site immediately"
         className="fixed bottom-5 right-5 z-[9999] bg-text-primary text-bg text-xs font-semibold px-4 py-2.5 rounded-sm shadow-sm hover:bg-accent hover:text-bg transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
       >
