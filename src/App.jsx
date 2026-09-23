@@ -18,6 +18,7 @@ import Guidelines from "./pages/Guidelines.jsx";
 import Search from "./pages/Search.jsx";
 import Newsletter from "./pages/Newsletter.jsx";
 import StartHere from "./pages/StartHere.jsx";
+import FacilitatorApplication from "./pages/FacilitatorApplication.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/start-here" element={<StartHere />} />
         <Route path="/newsletter" element={<Newsletter />} />
+        <Route path="/facilitator-application" element={<FacilitatorApplication />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
