@@ -3,12 +3,14 @@ import { Outlet, Link, NavLink, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { pb } from '../lib/pb.js';
 import LogoMark from '../components/LogoMark.jsx';
+import WelcomeModal from '../components/WelcomeModal.jsx';
 import Menu from 'icon:menu';
 import X from 'icon:x';
 import AlertTriangle from 'icon:alert-triangle';
 import User from 'icon:user';
 import LogOut from 'icon:log-out';
 import ChevronDown from 'icon:chevron-down';
+import SearchIcon from 'icon:search';
 
 const navLinks = [
   { to: '/', label: 'Home', exact: true },
@@ -42,6 +44,7 @@ export default function SiteLayout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-bg text-text-primary font-body">
+      <WelcomeModal />
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-surface border-b border-border">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
@@ -81,6 +84,19 @@ export default function SiteLayout() {
               Crisis Help
             </NavLink>
           </nav>
+
+          {/* Search */}
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              `hidden lg:flex items-center justify-center w-9 h-9 rounded-sm transition-colors ${
+                isActive ? 'text-accent bg-accent/10' : 'text-text-secondary hover:text-text-primary hover:bg-raised'
+              }`
+            }
+            aria-label="Search"
+          >
+            <SearchIcon size={18} />
+          </NavLink>
 
           {/* Right side - auth */}
           <div className="hidden lg:flex items-center gap-2">
@@ -147,6 +163,17 @@ export default function SiteLayout() {
                 {link.label}
               </NavLink>
             ))}
+            <NavLink
+              to="/search"
+              onClick={() => setMobileOpen(false)}
+              className={({ isActive }) =>
+                `px-4 py-3 rounded-sm text-base font-medium flex items-center gap-2 ${
+                  isActive ? 'text-accent bg-accent/10' : 'text-text-secondary hover:text-text-primary hover:bg-raised'
+                }`
+              }
+            >
+              <SearchIcon size={16} /> Search
+            </NavLink>
             <NavLink
               to="/crisis"
               onClick={() => setMobileOpen(false)}
@@ -222,8 +249,11 @@ export default function SiteLayout() {
             <div>
               <p className="text-text-muted text-xs uppercase tracking-widest mb-3">More</p>
               <div className="flex flex-col gap-1.5">
+                <Link to="/about" className="text-sm text-text-secondary hover:text-accent transition-colors">About Us</Link>
+                <Link to="/guidelines" className="text-sm text-text-secondary hover:text-accent transition-colors">Community Guidelines</Link>
+                <Link to="/members" className="text-sm text-text-secondary hover:text-accent transition-colors">Member Directory</Link>
+                <Link to="/search" className="text-sm text-text-secondary hover:text-accent transition-colors">Search</Link>
                 <Link to="/suggestion-box" className="text-sm text-text-secondary hover:text-accent transition-colors">Suggestion Box</Link>
-                <Link to="/directory" className="text-sm text-text-secondary hover:text-accent transition-colors">Member Directory</Link>
                 <Link to="/facilitators" className="text-sm text-text-secondary hover:text-accent transition-colors">Facilitator Directory</Link>
                 <Link to="/auth" className="text-sm text-text-secondary hover:text-accent transition-colors">Join the Collective</Link>
               </div>
