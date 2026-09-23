@@ -82,6 +82,7 @@ export default function Auth() {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
+          <img src="/static/logo.png" alt="The Unbound Minds Collective" className="h-24 w-auto mx-auto mb-4" />
           <h1 className="font-display text-4xl font-bold text-text-primary mb-2">Welcome home.</h1>
           <p className="text-text-secondary">Join a community built on acceptance and peer support.</p>
         </div>

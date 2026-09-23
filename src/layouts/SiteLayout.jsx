@@ -51,7 +51,7 @@ export default function SiteLayout() {
               alt="The Unbound Minds Collective"
               className="h-10 w-auto"
             />
-            <span className="font-display text-accent text-lg font-semibold leading-tight hidden sm:block">
+            <span className="font-display text-accent text-lg font-semibold leading-tight hidden lg:block">
               The Unbound Minds<br /> Collective
             </span>
           </Link>
