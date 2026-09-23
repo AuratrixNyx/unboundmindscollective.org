@@ -14,6 +14,7 @@ import SearchIcon from 'icon:search';
 
 const navLinks = [
   { to: '/', label: 'Home', exact: true },
+  { to: '/about', label: 'About' },
   { to: '/community', label: 'Community' },
   { to: '/resources', label: 'Resources' },
   { to: '/sessions', label: 'Sessions' },
