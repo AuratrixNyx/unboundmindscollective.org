@@ -93,19 +93,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Upcoming sessions */}
-      {sessions.length > 0 && (
-        <section className="bg-surface border-t border-b border-border py-16">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="font-display text-3xl font-semibold text-text-primary">Upcoming Sessions</h2>
-                <p className="text-text-secondary mt-1">Live conversations and peer-led discussions</p>
-              </div>
-              <Link to="/sessions" className="text-accent text-sm hover:text-accent-hover flex items-center gap-1">
-                View all <ArrowRight size={14} />
-              </Link>
+      {/* Upcoming sessions — always visible */}
+      <section className="bg-surface border-t border-b border-border py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h2 className="font-display text-3xl font-semibold text-text-primary">What's On</h2>
+              <p className="text-text-secondary mt-1">Upcoming facilitated conversations and peer-led discussions</p>
             </div>
+            <Link to="/sessions" className="text-accent text-sm hover:text-accent-hover flex items-center gap-1">
+              View all <ArrowRight size={14} />
+            </Link>
+          </div>
+          {sessions.length === 0 ? (
+            <div className="bg-raised border border-border rounded-sm p-8 text-center">
+              <Calendar className="mx-auto text-text-muted mb-3" size={28} />
+              <p className="text-text-secondary font-medium mb-1">No sessions scheduled yet</p>
+              <p className="text-text-muted text-sm">Check back soon — new conversations are always in the works.</p>
+              <Link to="/sessions" className="inline-block mt-4 text-accent text-sm hover:text-accent-hover underline">Browse past sessions</Link>
+            </div>
+          ) : (
             <div className="grid md:grid-cols-3 gap-6">
               {sessions.map(s => (
                 <div key={s.id} className="bg-raised border border-border rounded-sm p-5">
@@ -119,9 +126,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
 
       {/* What we are not */}
       <section className="max-w-4xl mx-auto px-4 py-16">

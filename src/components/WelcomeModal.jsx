@@ -100,11 +100,11 @@ export default function WelcomeModal() {
 
           <div className="flex flex-col sm:flex-row gap-2">
             <Link
-              to="/guidelines"
+              to="/start-here"
               onClick={dismiss}
               className="flex-1 py-2.5 text-center text-sm font-medium border border-accent text-accent hover:bg-accent/10 rounded-sm transition-colors"
             >
-              Read Our Guidelines
+              Start Here →
             </Link>
             <button
               onClick={dismiss}

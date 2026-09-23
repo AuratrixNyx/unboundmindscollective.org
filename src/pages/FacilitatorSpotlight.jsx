@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import ExternalLink from 'icon:external-link';
@@ -148,8 +149,16 @@ export default function FacilitatorSpotlight() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       <div className="mb-10">
-        <h1 className="font-display text-4xl font-bold text-text-primary mb-3">Facilitator Directory</h1>
-        <p className="text-text-secondary">Meet the facilitators who guide our community conversations and sessions.</p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <h1 className="font-display text-4xl font-bold text-text-primary mb-3">Facilitator Directory</h1>
+            <p className="text-text-secondary">Meet the facilitators who guide our community conversations and sessions.</p>
+          </div>
+          <Link to="/facilitator-application"
+            className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-bg text-sm font-medium rounded-sm hover:opacity-90 transition-opacity">
+            Apply to Facilitate →
+          </Link>
+        </div>
       </div>
 
       {/* Facilitator's own profile management */}

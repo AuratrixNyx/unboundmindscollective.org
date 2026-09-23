@@ -7,6 +7,7 @@ import CheckCircle from 'icon:check-circle';
 import MessageSquare from 'icon:message-square';
 import ChevronDown from 'icon:chevron-down';
 import ChevronUp from 'icon:chevron-up';
+import Video from 'icon:video';
 
 function formatDate(str) {
   if (!str) return 'Date TBA';
@@ -81,6 +82,12 @@ function SessionCard({ session, user }) {
             <span>{formatDate(session.session_date)}</span>
           </div>
           <p className="text-text-secondary text-sm leading-relaxed">{session.description}</p>
+          {session.recording_url && (
+            <a href={session.recording_url} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-sage/10 border border-sage/20 text-sage text-sm rounded-sm hover:bg-sage/20 transition-colors">
+              <Video size={14} /> Watch Recording
+            </a>
+          )}
         </div>
       </div>
 
