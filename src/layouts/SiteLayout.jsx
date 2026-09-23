@@ -44,7 +44,7 @@ export default function SiteLayout() {
   const isElevated = user && ['moderator', 'facilitator', 'guest_facilitator', 'admin'].includes(user.role);
 
   const handleQuickExit = () => {
-    window.location.replace('https://www.google.com');
+    window.location.href = 'https://www.google.com';
   };
 
   return (
@@ -52,13 +52,13 @@ export default function SiteLayout() {
       <WelcomeModal />
 
       {/* Quick Exit Button — always visible, fixed position */}
-      <button
-        onClick={handleQuickExit}
+      <a
+        href="https://www.google.com"
         aria-label="Quick exit — leave this site immediately"
         className="fixed bottom-5 right-5 z-[9999] bg-text-primary text-bg text-xs font-semibold px-4 py-2.5 rounded-sm shadow-sm hover:bg-accent hover:text-bg transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
       >
         Exit
-      </button>
+      </a>
 
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-surface border-b border-border">
