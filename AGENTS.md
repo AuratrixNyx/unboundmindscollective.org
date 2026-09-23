@@ -1,6 +1,6 @@
 # The Unbound Minds Collective — Project State
 
-Last updated: 2026-09-22
+Last updated: 2026-09-23
 
 ## Stack
 Vite + React SPA, Tailwind CSS v4, PocketBase for backend.
