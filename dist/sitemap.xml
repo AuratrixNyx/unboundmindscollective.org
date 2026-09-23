@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.unboundmindscollective.org/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/about</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/guidelines</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/community</loc><priority>0.8</priority><changefreq>daily</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/sessions</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/resources</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/facilitators</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/ai-guide</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/crisis</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/start-here</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/members</loc><priority>0.6</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/newsletter</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/facilitator-application</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/suggestion-box</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/search</loc><priority>0.5</priority><changefreq>weekly</changefreq></url>
+</urlset>
