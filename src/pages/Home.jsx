@@ -49,6 +49,11 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-surface border-b border-border">
         <div className="max-w-4xl mx-auto px-4 py-20 text-center">
+          <img
+            src="/static/logo.png"
+            alt="The Unbound Minds Collective"
+            className="h-32 sm:h-40 w-auto mx-auto mb-6"
+          />
           <p className="text-accent text-sm uppercase tracking-widest mb-4 font-medium">Peer Advocacy Hub</p>
           <h1 className="font-display text-5xl sm:text-6xl font-bold text-text-primary leading-tight mb-6">
             Authentic peer advocacy for all the ways we live, love, and thrive.

@@ -46,8 +46,13 @@ export default function SiteLayout() {
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <span className="font-display text-accent text-xl font-semibold leading-tight">
-              The Unbound Minds<br className="hidden sm:block" /> Collective
+            <img
+              src="/static/logo.png"
+              alt="The Unbound Minds Collective"
+              className="h-10 w-auto"
+            />
+            <span className="font-display text-accent text-lg font-semibold leading-tight hidden sm:block">
+              The Unbound Minds<br /> Collective
             </span>
           </Link>
 
@@ -204,7 +209,10 @@ export default function SiteLayout() {
           )}
           <div className="grid sm:grid-cols-3 gap-8 mb-8">
             <div>
-              <p className="font-display text-accent text-lg font-semibold mb-2">The Unbound Minds Collective</p>
+              <div className="flex items-center gap-3 mb-2">
+                <img src="/static/logo.png" alt="The Unbound Minds Collective" className="h-12 w-auto" />
+                <p className="font-display text-accent text-lg font-semibold leading-tight">The Unbound Minds Collective</p>
+              </div>
               <p className="text-text-muted text-sm leading-relaxed">A peer advocacy hub for LGBTQ+, BDSM/kink, and ENM/polyamory communities.</p>
             </div>
             <div>
