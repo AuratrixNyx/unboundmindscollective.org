@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import Heart from 'icon:heart';
 import Users from 'icon:users';
 import BookOpen from 'icon:book-open';
@@ -33,6 +34,7 @@ const pillars = [
 ];
 
 export default function Home() {
+  usePageMeta('Home', 'The Unbound Minds Collective — community-led peer advocacy for LGBTQ+, kink/BDSM, and ENM/polyamory communities. Not a clinic or therapy practice. A space to connect, learn, and belong.');
   const [sessions, setSessions] = useState([]);
 
   useEffect(() => {
@@ -54,12 +56,12 @@ export default function Home() {
             alt="The Unbound Minds Collective"
             className="h-72 sm:h-96 w-auto mx-auto mb-8"
           />
-          <p className="text-accent text-sm uppercase tracking-widest mb-4 font-medium">Peer Advocacy Hub</p>
+          <p className="text-accent text-sm uppercase tracking-widest mb-4 font-medium">Community-Led Peer Advocacy · San Antonio, TX &amp; Beyond</p>
           <h1 className="font-display text-5xl sm:text-6xl font-bold text-text-primary leading-tight mb-6">
             Authentic peer advocacy for all the ways we live, love, and thrive.
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto mb-4 leading-relaxed">
-            The Unbound Minds Collective is a community-driven space offering peer support, psychoeducation, and affirming discussion for LGBTQ+, kink/BDSM, and ENM/polyamory communities.
+            The Unbound Minds Collective is a community-led, non-clinical peer advocacy space — not a therapy practice or mental health clinic. We offer peer support, psychoeducation, and affirming discussion for LGBTQ+, kink/BDSM, and ENM/polyamory communities.
           </p>
           <div className="bg-raised border border-border rounded-sm px-5 py-3 text-sm text-text-muted max-w-xl mx-auto mb-8">
             <span className="text-accent font-medium">Not therapy.</span> We're a peer community, not a clinical service. We don't diagnose, treat, or provide crisis support — but we show up for each other with honesty and care.

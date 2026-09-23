@@ -42,14 +42,14 @@ const values = [
 ];
 
 export default function About() {
-  usePageMeta('About Us', 'Meet the heart behind The Unbound Minds Collective — Amber Frazier\'s story, our values, and why affirming peer advocacy matters for LGBTQ+, kink, and ENM communities.');
+  usePageMeta('About Us', 'The Unbound Minds Collective is a community-led peer advocacy space — not a clinic or therapy practice. Meet founder Amber Frazier and learn why affirming peer support for LGBTQ+, kink, and ENM communities matters.');
   return (
     <div className="bg-bg text-text-primary font-body">
 
       {/* ── Hero ── */}
       <section className="relative px-6 py-24 sm:py-32 lg:py-40 max-w-4xl mx-auto text-center">
         <p className="text-accent font-body text-sm tracking-widest uppercase mb-4 font-medium">
-          The Unbound Minds Collective
+          Community-Led Peer Advocacy · Not a Clinic or Therapy Practice
         </p>
         <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl leading-tight text-text-primary mb-6">
           Who We Are
