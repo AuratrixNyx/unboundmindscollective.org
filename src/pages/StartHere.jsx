@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import usePageMeta from '../hooks/usePageMeta.js';
 import Users from "icon:users";
 import BookOpen from "icon:book-open";
 import CalendarDays from "icon:calendar-days";
@@ -102,6 +103,7 @@ const firstSteps = [
 ];
 
 export default function StartHere() {
+  usePageMeta('Start Here', 'New to The Unbound Minds Collective? This is your guide to getting started — what we offer, how to join, and how to find your place in our affirming community.');
   return (
     <div className="bg-bg text-text-primary font-body">
 

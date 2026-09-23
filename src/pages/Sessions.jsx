@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import Calendar from 'icon:calendar';
 import CheckCircle from 'icon:check-circle';
@@ -138,6 +139,7 @@ function SessionCard({ session, user }) {
 }
 
 export default function Sessions() {
+  usePageMeta('Sessions', 'Upcoming and past peer advocacy sessions from The Unbound Minds Collective. Join live discussions, watch recordings, and submit your questions on LGBTQ+, kink, and polyamory topics.');
   const { user } = useAuth();
   const [upcoming, setUpcoming] = useState([]);
   const [past, setPast] = useState([]);

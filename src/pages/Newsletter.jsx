@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import CheckCircle from 'icon:check-circle';
 import Mail from 'icon:mail';
 import Calendar from 'icon:calendar';
@@ -11,6 +12,7 @@ import Users from 'icon:users';
 const INTERESTS = ['LGBTQ+', 'Kink/BDSM', 'ENM/Poly', 'General'];
 
 export default function Newsletter() {
+  usePageMeta('Monthly Digest', 'Sign up for The Unbound Minds Collective monthly digest — community updates, upcoming sessions, and resources for LGBTQ+, kink, and polyamory communities delivered to your inbox.');
   const [form, setForm] = useState({ email: '', first_name: '', interests: [] });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);

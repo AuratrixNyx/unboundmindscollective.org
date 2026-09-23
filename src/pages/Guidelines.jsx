@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import usePageMeta from '../hooks/usePageMeta.js';
 import Heart from 'icon:heart';
 import Shield from 'icon:shield';
 import CheckCircle from 'icon:check-circle';
@@ -132,6 +133,7 @@ const notService = [
 ];
 
 export default function Guidelines() {
+  usePageMeta('Community Guidelines', 'Our community agreements and code of conduct — how we keep The Unbound Minds Collective a safe, affirming space for LGBTQ+, kink, and polyamory communities.');
   return (
     <div className="font-body text-text-primary min-h-screen">
 

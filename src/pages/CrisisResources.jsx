@@ -1,6 +1,7 @@
 import Phone from 'icon:phone';
 import MessageSquare from 'icon:message-square';
 import ExternalLink from 'icon:external-link';
+import usePageMeta from '../hooks/usePageMeta.js';
 import AlertTriangle from 'icon:alert-triangle';
 
 const resources = [
@@ -67,6 +68,7 @@ const resources = [
 ];
 
 export default function CrisisResources() {
+  usePageMeta('Crisis Resources', 'Immediate crisis support resources for LGBTQ+, kink, and polyamory communities — hotlines, text lines, and online chats available 24/7. You are not alone.');
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="mb-8">

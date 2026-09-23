@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import usePageMeta from '../hooks/usePageMeta.js';
 import ExternalLink from 'icon:external-link';
 import BookOpen from 'icon:book-open';
 
@@ -135,6 +136,7 @@ const resources = {
 };
 
 export default function Resources() {
+  usePageMeta('Resources', 'Curated directories and educational resources for LGBTQ+, kink/BDSM, and ENM/polyamory communities — therapists, organizations, books, podcasts, and more.');
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (

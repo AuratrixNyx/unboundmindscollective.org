@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import CheckCircle from 'icon:check-circle';
 import ClipboardList from 'icon:clipboard-list';
 import Info from 'icon:info';
@@ -29,6 +30,7 @@ const initialForm = {
 };
 
 export default function FacilitatorApplication() {
+  usePageMeta('Facilitate a Session', 'Interested in facilitating a session for The Unbound Minds Collective? Share your expertise with our LGBTQ+, kink, and ENM/polyamory community — apply here.');
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);

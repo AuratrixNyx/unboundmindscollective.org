@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import EyeOff from 'icon:eye-off';
 import Eye from 'icon:eye';
@@ -114,6 +115,7 @@ function PostCard({ post, isMod, onToggleHide, onTogglePin }) {
 }
 
 export default function Community() {
+  usePageMeta('Community', 'Join the discussion at The Unbound Minds Collective — a peer forum for LGBTQ+, kink/BDSM, and ENM/polyamory communities to connect, share, and support each other.');
   const { user } = useAuth();
   const [category, setCategory] = useState('General');
   const [posts, setPosts] = useState([]);

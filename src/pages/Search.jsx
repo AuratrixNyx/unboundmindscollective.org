@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import SearchIcon from 'icon:search';
 import FileText from 'icon:file-text';
@@ -30,6 +31,7 @@ function highlight(text, query) {
 }
 
 export default function Search() {
+  usePageMeta('Search', 'Search posts, sessions, and resources across The Unbound Minds Collective community platform.');
   const { user } = useAuth();
   const [query, setQuery] = useState('');
   const debouncedQuery = useDebounce(query, DEBOUNCE_MS);

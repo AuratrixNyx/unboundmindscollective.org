@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import CheckCircle from 'icon:check-circle';
 import Lightbulb from 'icon:lightbulb';
@@ -8,6 +9,7 @@ import Lightbulb from 'icon:lightbulb';
 const focuses = ['LGBTQ+', 'Kink/BDSM', 'ENM/Poly', 'General/All'];
 
 export default function SuggestionBox() {
+  usePageMeta('Suggestion Box', 'Have an idea for a future session or community topic? Share it with The Unbound Minds Collective — your voice shapes what we explore together.');
   const { user } = useAuth();
   const [form, setForm] = useState({ topic: '', details: '', focuses: [], anonymous: false });
   const [loading, setLoading] = useState(false);

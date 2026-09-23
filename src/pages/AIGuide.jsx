@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
+import usePageMeta from '../hooks/usePageMeta.js';
 import AlertTriangle from 'icon:alert-triangle';
 import ArrowLeft from 'icon:arrow-left';
 import BookOpen from 'icon:book-open';
@@ -113,6 +114,7 @@ const CrisisBanner = () => (
 );
 
 export default function AIGuide() {
+  usePageMeta('Self-Care Guide', 'A gentle, guided self-reflection tool from The Unbound Minds Collective — explore your feelings, find grounding prompts, and access crisis support when you need it most.');
   const [step, setStep] = useState('select'); // 'select' | 'reflect' | 'crisis'
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [journal, setJournal] = useState('');

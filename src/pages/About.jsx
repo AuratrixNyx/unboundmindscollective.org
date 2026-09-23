@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import usePageMeta from '../hooks/usePageMeta.js';
 import Heart from "icon:heart";
 import Shield from "icon:shield";
 import Users from "icon:users";
@@ -41,6 +42,7 @@ const values = [
 ];
 
 export default function About() {
+  usePageMeta('About Us', 'Meet the heart behind The Unbound Minds Collective — Amber Frazier\'s story, our values, and why affirming peer advocacy matters for LGBTQ+, kink, and ENM communities.');
   return (
     <div className="bg-bg text-text-primary font-body">
 

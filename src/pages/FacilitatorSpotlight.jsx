@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import ExternalLink from 'icon:external-link';
 import Edit from 'icon:edit';
@@ -67,6 +68,7 @@ function ProfileCard({ profile }) {
 }
 
 export default function FacilitatorSpotlight() {
+  usePageMeta('Facilitators', 'Meet the facilitators of The Unbound Minds Collective — affirming advocates, educators, and community leaders specializing in LGBTQ+, kink/BDSM, and polyamory support.');
   const { user } = useAuth();
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);

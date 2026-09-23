@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { pb } from '../lib/pb.js';
+import usePageMeta from '../hooks/usePageMeta.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import UsersIcon from 'icon:users';
 import ShieldIcon from 'icon:shield';
@@ -66,6 +67,7 @@ function MemberCard({ member }) {
 }
 
 export default function MemberDirectory() {
+  usePageMeta('Member Directory', 'Connect with community members of The Unbound Minds Collective who have opted in to be found — filter by shared identity interests and find your people.');
   const { user } = useAuth();
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
