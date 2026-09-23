@@ -52,7 +52,7 @@ export default function Home() {
           <img
             src="/static/logo.png"
             alt="The Unbound Minds Collective"
-            className="h-44 sm:h-56 w-auto mx-auto mb-8"
+            className="h-72 sm:h-96 w-auto mx-auto mb-8"
           />
           <p className="text-accent text-sm uppercase tracking-widest mb-4 font-medium">Peer Advocacy Hub</p>
           <h1 className="font-display text-5xl sm:text-6xl font-bold text-text-primary leading-tight mb-6">
