@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router";
 import SiteLayout from "./layouts/SiteLayout.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 import Home from "./pages/Home.jsx";
 import Community from "./pages/Community.jsx";
 import Resources from "./pages/Resources.jsx";
@@ -23,6 +24,8 @@ import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       <Route element={<SiteLayout />}>
         <Route path="/" element={<Home />} />
@@ -47,5 +50,6 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
+    </>
   );
 }
