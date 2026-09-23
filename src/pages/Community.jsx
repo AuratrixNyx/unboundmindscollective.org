@@ -6,6 +6,8 @@ import EyeOff from 'icon:eye-off';
 import Eye from 'icon:eye';
 import MessageSquare from 'icon:message-square';
 import Plus from 'icon:plus';
+import Pin from 'icon:pin';
+import Shield from 'icon:shield';
 
 const CATEGORIES = ['General', 'LGBTQ+', 'Kink/BDSM', 'ENM/Poly', 'Announcements'];
 
@@ -21,18 +23,65 @@ function formatDate(str) {
   return new Date(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
+// Community agreements modal — shown once per browser session before first post
+function AgreementsModal({ onAccept, onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" role="dialog" aria-modal="true" aria-labelledby="agreements-title">
+      <div className="bg-bg border border-border rounded-sm max-w-lg w-full p-7 shadow-sm">
+        <div className="flex items-center gap-3 mb-4">
+          <Shield size={20} className="text-accent shrink-0" />
+          <h2 id="agreements-title" className="font-display text-2xl text-text-primary">Before you post</h2>
+        </div>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          By posting in the community you agree to our community guidelines. A quick reminder of what matters most:
+        </p>
+        <ul className="space-y-2 text-text-secondary text-sm mb-6">
+          {[
+            'Treat every member with dignity and respect.',
+            'Use content warnings (CW:) for potentially sensitive topics.',
+            'This is a peer space — not therapy. No clinical advice or crisis support here.',
+            'Hate, stigma, and conversion-based language are never welcome.',
+            'Moderators may hide content that violates these principles.',
+          ].map(rule => (
+            <li key={rule} className="flex gap-2"><span className="text-accent shrink-0">✦</span>{rule}</li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap gap-3">
+          <button onClick={onAccept}
+            className="px-5 py-2.5 bg-accent text-bg text-sm font-medium rounded-sm hover:opacity-90 transition-opacity">
+            I understand — let me post
+          </button>
+          <button onClick={onClose}
+            className="px-5 py-2.5 bg-raised border border-border text-text-secondary text-sm rounded-sm hover:text-text-primary">
+            Cancel
+          </button>
+        </div>
+        <p className="text-text-muted text-xs mt-4">
+          <Link to="/guidelines" className="underline hover:text-text-secondary">Read the full community guidelines →</Link>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Community() {
   const { user } = useAuth();
   const [category, setCategory] = useState('General');
   const [posts, setPosts] = useState([]);
+  const [pinnedPosts, setPinnedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ title: '', content: '', category: 'General' });
+  const [showAgreements, setShowAgreements] = useState(false);
+  const [form, setForm] = useState({ title: '', content: '', category: 'General', pinned: false });
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState(false);
 
   const isMod = user && ['moderator', 'admin'].includes(user.role);
+
+  // Check if user has already agreed this session
+  const hasAgreed = () => sessionStorage.getItem('umc_agreed') === '1';
+  const markAgreed = () => sessionStorage.setItem('umc_agreed', '1');
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -41,12 +90,22 @@ export default function Community() {
         ? `category="${category}"`
         : `category="${category}" && hidden=false`;
       const result = await pb.collection('posts').getList(1, 30, { filter, sort: '-created' });
-      setPosts(result.items);
+      // Separate pinned from regular
+      setPinnedPosts(result.items.filter(p => p.pinned));
+      setPosts(result.items.filter(p => !p.pinned));
     } catch (_) {}
     setLoading(false);
   };
 
   useEffect(() => { fetchPosts(); }, [category, user]);
+
+  const handleNewPost = () => {
+    if (hasAgreed()) {
+      setShowForm(o => !o);
+    } else {
+      setShowAgreements(true);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,6 +119,7 @@ export default function Community() {
         author_id: user.id,
         author_name: user.display_name || user.name,
         hidden: false,
+        pinned: isMod ? form.pinned : false,
       });
       setForm({ title: '', content: '', category: 'General' });
       setFormSuccess(true);

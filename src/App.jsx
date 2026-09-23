@@ -16,6 +16,8 @@ import About from "./pages/About.jsx";
 import MemberDirectory from "./pages/MemberDirectory.jsx";
 import Guidelines from "./pages/Guidelines.jsx";
 import Search from "./pages/Search.jsx";
+import Newsletter from "./pages/Newsletter.jsx";
+import StartHere from "./pages/StartHere.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -38,6 +40,8 @@ export default function App() {
         <Route path="/members" element={<MemberDirectory />} />
         <Route path="/guidelines" element={<Guidelines />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/start-here" element={<StartHere />} />
+        <Route path="/newsletter" element={<Newsletter />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
