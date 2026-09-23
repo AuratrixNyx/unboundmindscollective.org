@@ -223,6 +223,7 @@ export default function SiteLayout() {
               <p className="text-text-muted text-xs uppercase tracking-widest mb-3">More</p>
               <div className="flex flex-col gap-1.5">
                 <Link to="/suggestion-box" className="text-sm text-text-secondary hover:text-accent transition-colors">Suggestion Box</Link>
+                <Link to="/directory" className="text-sm text-text-secondary hover:text-accent transition-colors">Member Directory</Link>
                 <Link to="/facilitators" className="text-sm text-text-secondary hover:text-accent transition-colors">Facilitator Directory</Link>
                 <Link to="/auth" className="text-sm text-text-secondary hover:text-accent transition-colors">Join the Collective</Link>
               </div>

@@ -12,6 +12,9 @@ import AIGuide from "./pages/AIGuide.jsx";
 import SuggestionBox from "./pages/SuggestionBox.jsx";
 import FacilitatorSpotlight from "./pages/FacilitatorSpotlight.jsx";
 import CrisisResources from "./pages/CrisisResources.jsx";
+import About from "./pages/About.jsx";
+import MemberDirectory from "./pages/MemberDirectory.jsx";
+import Guidelines from "./pages/Guidelines.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -30,6 +33,9 @@ export default function App() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/facilitator-console" element={<FacilitatorConsole />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/directory" element={<MemberDirectory />} />
+        <Route path="/guidelines" element={<Guidelines />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
