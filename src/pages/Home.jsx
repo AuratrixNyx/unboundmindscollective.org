@@ -130,6 +130,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Facilitator call-out banner */}
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="relative overflow-hidden rounded-sm border border-accent/30 bg-surface px-8 py-7 flex flex-col sm:flex-row sm:items-center gap-5">
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
+            style={{ background: 'radial-gradient(ellipse at top left, rgba(164,107,60,0.07) 0%, transparent 70%)' }} />
+          <div className="flex-1 relative">
+            <p className="text-accent text-xs uppercase tracking-widest font-medium mb-1">Now welcoming facilitators</p>
+            <h2 className="font-display text-xl sm:text-2xl font-semibold text-text-primary mb-1.5">
+              Have knowledge to share? We'd love to hear from you.
+            </h2>
+            <p className="text-text-secondary text-sm leading-relaxed max-w-xl">
+              We're actively building our roster of community facilitators — advocates, educators, and practitioners who want to lead affirming conversations with our LGBTQ+, kink, and ENM communities. No clinical credentials required; lived experience is valued here.
+            </p>
+          </div>
+          <div className="relative shrink-0">
+            <Link
+              to="/facilitator-application"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-bg font-medium text-sm rounded-sm hover:bg-accent-hover transition-colors whitespace-nowrap"
+            >
+              Learn more & apply <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* What we are not */}
       <section className="max-w-4xl mx-auto px-4 py-16">
         <div className="bg-surface border border-border rounded-sm p-8">
