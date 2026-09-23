@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, Link, NavLink, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { pb } from '../lib/pb.js';
+import LogoMark from '../components/LogoMark.jsx';
 import Menu from 'icon:menu';
 import X from 'icon:x';
 import AlertTriangle from 'icon:alert-triangle';
@@ -45,12 +46,8 @@ export default function SiteLayout() {
       <header className="sticky top-0 z-50 bg-surface border-b border-border">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img
-              src="/static/logo.png"
-              alt="The Unbound Minds Collective"
-              className="h-10 w-auto"
-            />
+          <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="The Unbound Minds Collective — home">
+            <LogoMark height={44} />
             <span className="font-display text-accent text-lg font-semibold leading-tight hidden lg:block">
               The Unbound Minds<br /> Collective
             </span>
@@ -210,7 +207,7 @@ export default function SiteLayout() {
           <div className="grid sm:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <img src="/static/logo.png" alt="The Unbound Minds Collective" className="h-12 w-auto" />
+                <LogoMark height={48} />
                 <p className="font-display text-accent text-lg font-semibold leading-tight">The Unbound Minds Collective</p>
               </div>
               <p className="text-text-muted text-sm leading-relaxed">A peer advocacy hub for LGBTQ+, BDSM/kink, and ENM/polyamory communities.</p>
