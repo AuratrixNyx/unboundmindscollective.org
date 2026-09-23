@@ -45,17 +45,21 @@ export default function Auth() {
     }
     setLoading(true);
     try {
+      // Do NOT include role in the create payload — the createRule rejects it
       const data = {
         name: form.displayName,
         display_name: form.displayName,
         email: form.email,
         password: form.password,
         passwordConfirm: form.confirmPassword,
-        role: 'member',
+        invite_code_used: form.inviteCode.trim() || '',
       };
       const member = await pb.collection('members').create(data);
 
-      // Check invite code
+      // Log in immediately so we can use the auth token for invite code lookup
+      await pb.collection('members').authWithPassword(form.email, form.password);
+
+      // Check invite code after login (viewRule requires auth)
       if (form.inviteCode.trim()) {
         try {
           const codes = await pb.collection('invite_codes').getList(1, 1, {
@@ -63,13 +67,17 @@ export default function Auth() {
           });
           if (codes.items.length > 0) {
             const code = codes.items[0];
-            await pb.collection('members').update(member.id, { role: code.role_grant || 'moderator' });
+            // Mark code as used
             await pb.collection('invite_codes').update(code.id, { used: true, used_by: member.id });
+            // Role grant is applied by admin after reviewing used codes
+            // Store the granted role on the member record via admin-permitted update
+            if (code.role_grant) {
+              await pb.collection('members').update(member.id, { invite_code_used: form.inviteCode.trim() });
+            }
           }
         } catch (_) {}
       }
 
-      await pb.collection('members').authWithPassword(form.email, form.password);
       navigate('/community');
     } catch (err) {
       setError(err?.data?.message || 'Something went wrong. Please check your details and try again.');
