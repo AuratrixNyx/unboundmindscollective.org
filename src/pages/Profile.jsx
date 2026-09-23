@@ -22,24 +22,46 @@ const roleDescriptions = {
 };
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ displayName: '', bio: '', identityInterests: [], notifications: {} });
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  // Always fetch the freshest record directly so the form is never stale
   useEffect(() => {
     if (!user) { navigate('/auth'); return; }
-    setForm({
-      displayName: user.display_name || user.name || '',
-      bio: user.bio || '',
-      identityInterests: user.identity_interests || [],
-      notifications: user.notification_preferences || { announcements: true, sessions: true, replies: true },
-    });
-  }, [user, navigate]);
+    setFetching(true);
+    pb.collection('members').getOne(user.id)
+      .then(fresh => {
+        setForm({
+          displayName: fresh.display_name || fresh.name || '',
+          bio: fresh.bio || '',
+          identityInterests: fresh.identity_interests || [],
+          notifications: fresh.notification_preferences || { announcements: true, sessions: true, replies: true },
+        });
+      })
+      .catch(() => {
+        // fall back to cached auth data
+        setForm({
+          displayName: user.display_name || user.name || '',
+          bio: user.bio || '',
+          identityInterests: user.identity_interests || [],
+          notifications: user.notification_preferences || { announcements: true, sessions: true, replies: true },
+        });
+      })
+      .finally(() => setFetching(false));
+  }, [user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!user) return null;
+  if (fetching) return (
+    <div className="max-w-2xl mx-auto px-4 py-24 text-center">
+      <div className="w-8 h-8 border-2 border-accent/30 border-t-accent rounded-full animate-spin mx-auto mb-4" />
+      <p className="text-text-muted text-sm">Loading your profile…</p>
+    </div>
+  );
 
   const toggleIdentity = (val) => {
     setForm(f => ({
@@ -66,6 +88,7 @@ export default function Profile() {
         identity_interests: form.identityInterests,
         notification_preferences: form.notifications,
       });
+      await refreshUser();
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
