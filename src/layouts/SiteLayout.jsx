@@ -48,7 +48,7 @@ export default function SiteLayout() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0" aria-label="The Unbound Minds Collective — home">
             <LogoMark height={44} />
-            <span className="font-display text-accent text-lg font-semibold leading-tight hidden lg:block">
+            <span className="font-display text-accent text-lg font-semibold leading-tight">
               The Unbound Minds<br /> Collective
             </span>
           </Link>
