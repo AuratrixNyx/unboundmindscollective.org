@@ -67,14 +67,31 @@ export default function SiteLayout() {
     <div className="min-h-screen flex flex-col bg-bg text-text-primary font-body">
       <WelcomeModal />
 
-      {/* Quick Exit Button — always visible, fixed position */}
+      {/* Quick Exit Button — always visible, fixed position, impossible to miss */}
       <a
         href="https://www.google.com"
         onClick={handleQuickExit}
         aria-label="Quick exit — leave this site immediately"
-        className="fixed bottom-5 right-5 z-[9999] bg-text-primary text-bg text-xs font-semibold px-4 py-2.5 rounded-sm shadow-sm hover:bg-accent hover:text-bg transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          zIndex: 99999,
+          backgroundColor: '#1e1714',
+          color: '#f5f0eb',
+          fontSize: '11px',
+          fontWeight: '700',
+          padding: '8px 16px',
+          borderRadius: '4px',
+          textDecoration: 'none',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+          display: 'block',
+          lineHeight: '1.2',
+        }}
       >
-        Exit
+        Quick Exit
       </a>
 
       {/* Nav */}
