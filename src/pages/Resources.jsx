@@ -16,7 +16,7 @@ const resources = {
     {
       name: 'LGBTQ+ Healthcare Directory',
       fullName: 'LGBTQ+ Healthcare Directory',
-      desc: 'A curated directory of healthcare providers who affirm and understand LGBTQ+ needs and lived experience.',
+      desc: 'A curated directory of healthcare providers who respect and accurately reflect LGBTQ+ needs and lived experience.',
       url: 'https://lgbthealthcare.org',
     },
     {
@@ -28,7 +28,7 @@ const resources = {
     {
       name: 'Therapy for QPOC',
       fullName: 'Therapy for Queer People of Color',
-      desc: 'A resource hub and directory dedicated to supporting queer people of color in accessing affirming mental health support.',
+      desc: 'A resource hub and directory dedicated to supporting queer people of color in accessing non-pathologizing, inclusive mental health support.',
       url: 'https://therapyforqpoc.com',
     },
     {
@@ -74,7 +74,7 @@ const resources = {
     {
       name: 'Polyfriendly.org',
       fullName: 'Polyfriendly Relationship Therapist Directory',
-      desc: 'A directory of therapists who understand and affirm polyamorous and ethically non-monogamous relationships.',
+      desc: 'A directory of therapists who understand and respect polyamorous and ethically non-monogamous relationships — where alternative relationship styles are fully seen.',
       url: 'https://polyfriendly.org',
     },
     {
@@ -144,10 +144,10 @@ export default function Resources() {
       <div className="mb-10">
         <h1 className="font-display text-4xl font-bold text-text-primary mb-3">Resource Directories</h1>
         <p className="text-text-secondary leading-relaxed max-w-2xl">
-          We've gathered affirming directories and educational resources to help you find providers and information that understand your life. Always verify a provider's information directly before reaching out.
+          We've gathered community-grounded directories and educational resources to help you find providers and information that accurately reflect your life. Always verify a provider's information directly before reaching out.
         </p>
         <div className="mt-4 p-4 bg-surface border border-border rounded-sm text-xs text-text-muted leading-relaxed">
-          <strong className="text-text-secondary">A note:</strong> These are independently maintained directories. We link to them as a community service — always verify a provider's current information, qualifications, and affirming practices directly.
+          <strong className="text-text-secondary">A note:</strong> These are independently maintained directories. We link to them as a community service — always verify a provider's current information, qualifications, and inclusive practices directly.
         </div>
       </div>
 

@@ -39,7 +39,7 @@ const commitments = [
 
 const welcomed = [
   {
-    label: 'Affirming, open-minded discussion',
+    label: 'Open-container, de-stigmatized discussion',
     detail: 'Conversations that hold space for different experiences and perspectives, especially those that are underrepresented in mainstream mental health spaces.',
   },
   {
@@ -133,7 +133,7 @@ const notService = [
 ];
 
 export default function Guidelines() {
-  usePageMeta('Community Guidelines', 'Our community agreements and code of conduct — how we keep The Unbound Minds Collective a safe, affirming space for LGBTQ+, kink, and polyamory communities.');
+  usePageMeta('Community Guidelines', 'Our community agreements and code of conduct — how we keep The Unbound Minds Collective a safe, radically welcoming space for LGBTQ+, kink, and polyamory communities.');
   return (
     <div className="font-body text-text-primary min-h-screen">
 

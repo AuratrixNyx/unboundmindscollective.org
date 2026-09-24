@@ -15,7 +15,7 @@ const pillars = [
     title: 'LGBTQ+ Community',
     color: 'text-accent',
     bg: 'bg-accent/10 border-accent/20',
-    desc: 'Affirming space for queer, trans, non-binary, and questioning folks. From identity exploration to navigating systems that weren\'t built with us in mind — you\'re held here.',
+    desc: 'A container designed explicitly to welcome queer, trans, non-binary, and questioning folks. From identity exploration to navigating systems that weren\'t built with us in mind — you\'re fully seen and held here.',
   },
   {
     icon: <Users size={28} />,
@@ -29,12 +29,12 @@ const pillars = [
     title: 'ENM / Polyamory',
     color: 'text-accent-hover',
     bg: 'bg-accent/10 border-accent/30',
-    desc: 'A home for ethical non-monogamy in all its forms. Relationship structures, navigating jealousy, communication tools, and finding affirming support.',
+    desc: 'A home for ethical non-monogamy in all its forms. Relationship structures, navigating jealousy, communication tools, and finding subculture-informed peer support.',
   },
 ];
 
 export default function Home() {
-  usePageMeta('Home', 'The Unbound Minds Collective — community-led peer advocacy for LGBTQ+, kink/BDSM, and ENM/polyamory communities. Not a clinic or therapy practice. A space to connect, learn, and belong.');
+  usePageMeta('Home', 'The Unbound Minds Collective — community-grounded, peer-led advocacy for LGBTQ+, kink/BDSM, and ENM/polyamory communities. Not a clinic or therapy practice. A space to connect, learn, and belong.');
   const [sessions, setSessions] = useState([]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Home() {
             Authentic peer advocacy for all the ways we live, love, and thrive.
           </h1>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto mb-4 leading-relaxed">
-            The Unbound Minds Collective is a community-led, non-clinical peer advocacy space — not a therapy practice or mental health clinic. We offer peer support, psychoeducation, and affirming discussion for LGBTQ+, kink/BDSM, and ENM/polyamory communities.
+            The Unbound Minds Collective is a community-led, non-clinical peer advocacy space — not a therapy practice or mental health clinic. We offer peer support, psychoeducation, and de-stigmatized discussion for LGBTQ+, kink/BDSM, and ENM/polyamory communities.
           </p>
           <div className="bg-raised border border-border rounded-sm px-5 py-3 text-sm text-text-muted max-w-xl mx-auto mb-8">
             <span className="text-accent font-medium">Not therapy.</span> We're a peer community, not a clinical service. We don't diagnose, treat, or provide crisis support — but we show up for each other with honesty and care.
@@ -143,7 +143,7 @@ export default function Home() {
               Have knowledge to share? We'd love to hear from you.
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed max-w-xl">
-              We're actively building our roster of community facilitators — advocates, educators, and practitioners who want to lead affirming conversations with our LGBTQ+, kink, and ENM communities. No clinical credentials required; lived experience is valued here.
+              We're actively building our roster of community facilitators — advocates, educators, and practitioners who want to lead lived-experience focused conversations with our LGBTQ+, kink, and ENM communities. No clinical credentials required; your story and knowledge are valued here.
             </p>
           </div>
           <div className="relative shrink-0">
@@ -170,7 +170,7 @@ export default function Home() {
                   <ul className="text-text-secondary space-y-1.5 leading-relaxed">
                     <li>✓ A peer advocacy community</li>
                     <li>✓ A psychoeducation resource hub</li>
-                    <li>✓ A space for affirming discussion</li>
+                    <li>✓ A space for de-stigmatized, open discussion</li>
                     <li>✓ Community-driven and non-clinical</li>
                     <li>✓ A place to connect and belong</li>
                   </ul>

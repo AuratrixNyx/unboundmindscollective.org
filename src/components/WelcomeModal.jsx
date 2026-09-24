@@ -74,7 +74,7 @@ export default function WelcomeModal() {
                 <Shield size={15} className="text-accent" />
               </div>
               <div>
-                <p className="text-sm font-medium text-text-primary">A moderated, affirming space</p>
+                <p className="text-sm font-medium text-text-primary">A moderated, radically welcoming space</p>
                 <p className="text-xs text-text-muted">Stigma, moralization, and conversion frameworks are not welcome here. Our guidelines exist to protect everyone.</p>
               </div>
             </div>

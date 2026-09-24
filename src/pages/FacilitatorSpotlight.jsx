@@ -9,7 +9,7 @@ import CheckCircle from 'icon:check-circle';
 import Plus from 'icon:plus';
 
 const specialtyOptions = [
-  'LGBTQ+ Affirming', 'Kink-Aware', 'ENM/Poly Specialist', 'Trauma-Informed',
+  'LGBTQ+ Inclusive', 'Kink-Aware', 'ENM/Poly Specialist', 'Trauma-Informed',
   'CBT', 'DBT', 'Somatic', 'Peer Advocacy',
 ];
 
@@ -68,7 +68,7 @@ function ProfileCard({ profile }) {
 }
 
 export default function FacilitatorSpotlight() {
-  usePageMeta('Facilitators', 'Meet the facilitators of The Unbound Minds Collective — affirming advocates, educators, and community leaders specializing in LGBTQ+, kink/BDSM, and polyamory support.');
+  usePageMeta('Facilitators', 'Meet the facilitators of The Unbound Minds Collective — peer-led advocates, educators, and community leaders specializing in LGBTQ+, kink/BDSM, and polyamory support.');
   const { user } = useAuth();
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -27,7 +27,7 @@ const whereToBegin = [
     icon: BookOpen,
     title: "Resources",
     description:
-      "Looking for an affirming therapist, a kink-aware practitioner, or ENM-friendly support? Our directory is curated by and for people who actually get it.",
+      "Looking for a subculture-informed therapist, a kink-aware practitioner, or ENM-friendly support? Our directory is curated by and for people who actually get it.",
     href: "/resources",
     color: "text-sage",
     bg: "bg-sage/10",
@@ -103,7 +103,7 @@ const firstSteps = [
 ];
 
 export default function StartHere() {
-  usePageMeta('Start Here', 'New to The Unbound Minds Collective? This is your guide to getting started — what we offer, how to join, and how to find your place in our affirming community.');
+  usePageMeta('Start Here', 'New to The Unbound Minds Collective? This is your guide to getting started — what we offer, how to join, and how to find your place in our community-grounded, radically welcoming space.');
   return (
     <div className="bg-bg text-text-primary font-body">
 

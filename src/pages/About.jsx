@@ -42,7 +42,7 @@ const values = [
 ];
 
 export default function About() {
-  usePageMeta('About Us', 'The Unbound Minds Collective is a community-led peer advocacy space — not a clinic or therapy practice. Meet founder Amber Frazier and learn why affirming peer support for LGBTQ+, kink, and ENM communities matters.');
+  usePageMeta('About Us', 'The Unbound Minds Collective is a community-grounded, peer-led advocacy space — not a clinic or therapy practice. Meet founder Amber Frazier and learn why subculture-informed peer support for LGBTQ+, kink, and ENM communities matters.');
   return (
     <div className="bg-bg text-text-primary font-body">
 
@@ -61,7 +61,7 @@ export default function About() {
           This platform was born from a recognition that people in LGBTQ+, BDSM/kink, and ENM/polyamory
           communities often find themselves navigating a world that either misunderstands them or actively
           harms them — sometimes in the very spaces meant to help. We built The Unbound Minds Collective
-          because affirming, nuanced support shouldn't be rare. It should be the baseline.
+          because non-pathologizing, subculture-informed support shouldn't be rare. It should be the baseline.
         </p>
       </section>
 
@@ -80,7 +80,7 @@ export default function About() {
                 My name is Amber Frazier. I am omnisexual, a switch, and polyamorous — a member of every community this platform serves. And for a long time, I struggled to find care that recognized all of who I am.
               </p>
               <p className="text-text-secondary text-base leading-relaxed mb-4">
-                The bias I encountered wasn't only in mental health settings. It showed up in primary care, in the assumptions providers made, in the questions they didn't ask, and in the shame that sometimes accompanied the ones they did. Finding affirming care — truly affirming care, care that didn't require me to leave parts of myself at the door — took far longer than it should have.
+                The bias I encountered wasn't only in mental health settings. It showed up in primary care, in the assumptions providers made, in the questions they didn't ask, and in the shame that sometimes accompanied the ones they did. Finding care that truly witnessed and respected all of who I am — care that didn't require me to leave parts of myself at the door — took far longer than it should have.
               </p>
               <p className="text-text-secondary text-base leading-relaxed mb-4">
                 When I finally found it, it changed things. And I knew I wanted to help others find it too.
@@ -148,11 +148,7 @@ export default function About() {
           </h2>
           <div className="border-l-4 border-accent pl-6 text-left">
             <p className="text-text-secondary text-lg sm:text-xl leading-relaxed">
-              The Unbound Minds Collective is an AI-assisted peer advocacy hub providing affirming, nuanced
-              support for LGBTQ+, BDSM/kink, and ENM/polyamory communities — through self-care guidance,
-              tailored resources, and help navigating identity-specific challenges. We meet people where they
-              are, without judgment, without agenda, and without the assumption that any part of who they are
-              needs changing.
+              The Unbound Minds Collective is a peer advocacy hub built by and for LGBTQ+, BDSM/kink, and ENM/polyamory communities — through self-care guidance, tailored resources, and help navigating identity-specific challenges. We center and honor your lived experience, without judgment, without agenda, and without the assumption that any part of who you are needs changing.
             </p>
           </div>
         </div>

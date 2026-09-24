@@ -204,7 +204,7 @@ export default function FacilitatorApplication() {
               value={form.credentials}
               onChange={e => set('credentials', e.target.value)}
               className="w-full bg-raised border border-border rounded-sm px-3 py-2.5 text-text-primary text-sm focus:border-accent outline-hidden resize-none"
-              placeholder="e.g. Licensed therapist specializing in kink-affirming care; 10 years in LGBTQ+ advocacy; polyamorous community organizer for 6 years…"
+              placeholder="e.g. Licensed therapist specializing in kink-aware, non-pathologizing care; 10 years in LGBTQ+ advocacy; polyamorous community organizer for 6 years…"
             />
           </div>
 

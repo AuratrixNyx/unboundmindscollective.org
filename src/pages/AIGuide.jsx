@@ -50,7 +50,7 @@ const topics = [
       'How do you typically respond when someone misunderstands or dismisses who you are? What do you wish you could say?',
       'What helps you stay grounded in your own truth when the outside world is loud with judgment?',
     ],
-    selfcare: 'Write a brief "counter-narrative" — a few sentences that affirm the truth of your identity and choices, in your own words. Return to it when external voices get too loud.',
+    selfcare: 'Write a brief "counter-narrative" — a few sentences that honor and acknowledge the truth of your identity and choices, in your own words. Return to it when external voices get too loud.',
   },
   {
     id: 'selfcompassion',
@@ -90,7 +90,7 @@ const topics = [
       'What barriers have made it hard to access the kind of support you deserve — practical, financial, cultural, or otherwise?',
       'What would you tell a close friend who needed the kind of support you\'re currently looking for?',
     ],
-    selfcare: 'Check out our Resources page for affirming directories of providers who understand your community. You don\'t have to educate your therapist — you deserve one who already gets it.',
+    selfcare: 'Check out our Resources page for subculture-informed, lived-experience focused directories of providers who understand your community. You don\'t have to educate your therapist — you deserve one who already gets it.',
   },
 ];
 
@@ -144,14 +144,14 @@ export default function AIGuide() {
       <div className="mb-8">
         <h1 className="font-display text-4xl font-bold text-text-primary mb-3">Peer Self-Care Guide</h1>
         <p className="text-text-secondary leading-relaxed">
-          A space for gentle reflection and affirming self-exploration. Choose a topic and work through some prompts at your own pace.
+          A space for gentle reflection and strengths-based self-exploration. Choose a topic and work through some prompts at your own pace.
         </p>
       </div>
 
       {/* Disclaimer */}
       <div className="bg-surface border border-border rounded-sm p-4 mb-6 text-sm text-text-secondary leading-relaxed">
         <span className="text-accent font-medium">About this guide: </span>
-        This guide offers peer-style self-care prompts and affirming reflection questions. It is not a therapist, counselor, or crisis service. If you are in distress, please reach out to a professional or crisis line.
+        This guide offers peer-style self-care prompts and empowering reflection questions. It is not a therapist, counselor, or crisis service. If you are in distress, please reach out to a professional or crisis line.
       </div>
 
       {step === 'select' && (
