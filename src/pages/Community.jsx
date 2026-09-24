@@ -70,6 +70,9 @@ function AgreementsModal({ onAccept, onClose }) {
 }
 
 function PostCard({ post, isMod, onToggleHide, onTogglePin }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = post.content && post.content.length > 280;
+
   return (
     <div className={`bg-surface border rounded-sm p-5 transition-colors ${
       post.pinned ? 'border-accent/40 bg-accent/5' : post.hidden ? 'border-danger/20 opacity-60' : 'border-border hover:border-accent/30'
@@ -90,7 +93,17 @@ function PostCard({ post, isMod, onToggleHide, onTogglePin }) {
             )}
           </div>
           <h3 className="font-display text-lg font-semibold text-text-primary mb-1">{post.title}</h3>
-          <p className="text-text-secondary text-sm leading-relaxed line-clamp-2">{post.content}</p>
+          <p className="text-text-secondary text-sm leading-relaxed whitespace-pre-wrap">
+            {isLong && !expanded ? post.content.slice(0, 280) + '…' : post.content}
+          </p>
+          {isLong && (
+            <button
+              onClick={() => setExpanded(e => !e)}
+              className="mt-2 text-accent text-xs hover:text-accent-hover font-medium transition-colors"
+            >
+              {expanded ? 'Show less ↑' : 'Read more ↓'}
+            </button>
+          )}
           <div className="flex items-center gap-3 mt-3 text-text-muted text-xs">
             <span>{post.author_name || 'Anonymous'}</span>
             <span>·</span>
