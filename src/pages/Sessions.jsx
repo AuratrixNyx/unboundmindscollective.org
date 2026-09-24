@@ -9,6 +9,7 @@ import MessageSquare from 'icon:message-square';
 import ChevronDown from 'icon:chevron-down';
 import ChevronUp from 'icon:chevron-up';
 import Video from 'icon:video';
+import BookOpen from 'icon:book-open';
 
 function formatDate(str) {
   if (!str) return 'Date TBA';
@@ -83,11 +84,34 @@ function SessionCard({ session, user }) {
             <span>{formatDate(session.session_date)}</span>
           </div>
           <p className="text-text-secondary text-sm leading-relaxed">{session.description}</p>
-          {session.recording_url && (
-            <a href={session.recording_url} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-sage/10 border border-sage/20 text-sage text-sm rounded-sm hover:bg-sage/20 transition-colors">
-              <Video size={14} /> Watch Recording
-            </a>
+          <div className="flex flex-wrap gap-3 mt-4">
+            {session.recording_url && (
+              <a href={session.recording_url} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-sage/10 border border-sage/20 text-sage text-sm rounded-sm hover:bg-sage/20 transition-colors">
+                <Video size={14} /> Watch Recording
+              </a>
+            )}
+            {session.workbook_url && (
+              <a href={session.workbook_url} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/20 text-accent text-sm rounded-sm hover:bg-accent/20 transition-colors">
+                <BookOpen size={14} /> Open Workbook
+              </a>
+            )}
+          </div>
+          {session.workbook_url && (
+            <div className="mt-6">
+              <p className="text-text-muted text-xs mb-2">You can also fill in the workbook right here — your answers stay private to you:</p>
+              <div style={{ position: 'relative', width: '100%', height: 0, paddingTop: '100%', overflow: 'hidden', borderRadius: '6px', boxShadow: '0 2px 8px 0 rgba(63,69,81,0.10)' }}>
+                <iframe
+                  loading="lazy"
+                  style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, border: 'none', padding: 0, margin: 0 }}
+                  src={session.workbook_url.includes('embed') ? session.workbook_url : session.workbook_url.replace('/view', '/view?embed')}
+                  allowFullScreen
+                  allow="fullscreen"
+                  title="Session Workbook"
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

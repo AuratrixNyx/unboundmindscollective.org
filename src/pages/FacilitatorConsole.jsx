@@ -22,7 +22,7 @@ export default function FacilitatorConsole() {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editSession, setEditSession] = useState(null);
-  const [form, setForm] = useState({ title: '', description: '', session_date: '', topic_tags: '', status: 'upcoming' });
+  const [form, setForm] = useState({ title: '', description: '', session_date: '', topic_tags: '', status: 'upcoming', recording_url: '', workbook_url: '' });
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [qaMap, setQaMap] = useState({});
@@ -69,7 +69,7 @@ export default function FacilitatorConsole() {
 
   const startCreate = () => {
     setEditSession(null);
-    setForm({ title: '', description: '', session_date: '', topic_tags: '', status: 'upcoming' });
+    setForm({ title: '', description: '', session_date: '', topic_tags: '', status: 'upcoming', recording_url: '', workbook_url: '' });
     setShowForm(true);
   };
 
@@ -81,6 +81,8 @@ export default function FacilitatorConsole() {
       session_date: s.session_date ? s.session_date.split('T')[0] : '',
       topic_tags: Array.isArray(s.topic_tags) ? s.topic_tags.join(', ') : (s.topic_tags || ''),
       status: s.status || 'upcoming',
+      recording_url: s.recording_url || '',
+      workbook_url: s.workbook_url || '',
     });
     setShowForm(true);
   };
@@ -98,6 +100,8 @@ export default function FacilitatorConsole() {
         facilitator_id: user.id,
         facilitator_name: user.display_name || user.name,
         published: false,
+        recording_url: form.recording_url || '',
+        workbook_url: form.workbook_url || '',
       };
       if (editSession) {
         await pb.collection('sessions').update(editSession.id, data);
@@ -192,6 +196,20 @@ export default function FacilitatorConsole() {
                   <input type="text" value={form.topic_tags} onChange={e => setForm(f => ({ ...f, topic_tags: e.target.value }))}
                     className="w-full bg-raised border border-border rounded-sm px-3 py-2.5 text-text-primary text-sm focus:border-accent outline-hidden"
                     placeholder="LGBTQ+, Relationships, Burnout" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Recording Link <span className="text-text-muted">(optional — add after the session is recorded)</span></label>
+                  <p className="text-text-muted text-xs mb-1.5">Paste a YouTube, Vimeo, or Google Drive link here once your recording is ready.</p>
+                  <input type="url" value={form.recording_url} onChange={e => setForm(f => ({ ...f, recording_url: e.target.value }))}
+                    className="w-full bg-raised border border-border rounded-sm px-3 py-2.5 text-text-primary text-sm focus:border-accent outline-hidden"
+                    placeholder="https://youtube.com/watch?v=..." />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Workbook Link <span className="text-text-muted">(optional)</span></label>
+                  <p className="text-text-muted text-xs mb-1.5">In Canva: Share → Copy link. Paste it here and members will see an "Open Workbook" button and an inline preview they can fill in privately.</p>
+                  <input type="url" value={form.workbook_url} onChange={e => setForm(f => ({ ...f, workbook_url: e.target.value }))}
+                    className="w-full bg-raised border border-border rounded-sm px-3 py-2.5 text-text-primary text-sm focus:border-accent outline-hidden"
+                    placeholder="https://www.canva.com/design/..." />
                 </div>
                 <div className="flex gap-3">
                   <button type="submit" disabled={saving}
