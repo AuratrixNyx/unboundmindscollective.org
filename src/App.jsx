@@ -20,6 +20,8 @@ import Search from "./pages/Search.jsx";
 import Newsletter from "./pages/Newsletter.jsx";
 import StartHere from "./pages/StartHere.jsx";
 import FacilitatorApplication from "./pages/FacilitatorApplication.jsx";
+import TermsOfUse from "./pages/TermsOfUse.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -47,6 +49,8 @@ export default function App() {
         <Route path="/start-here" element={<StartHere />} />
         <Route path="/newsletter" element={<Newsletter />} />
         <Route path="/facilitator-application" element={<FacilitatorApplication />} />
+        <Route path="/terms" element={<TermsOfUse />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -271,7 +271,11 @@ export default function SiteLayout() {
               <Link to="/crisis" className="text-danger/80 hover:text-danger underline">Crisis Resources page</Link>{' '}
               for immediate support options.
             </p>
-            <p className="text-text-muted text-xs mt-3">© {new Date().getFullYear()} The Unbound Minds Collective. All rights reserved.</p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3">
+              <p className="text-text-muted text-xs">© {new Date().getFullYear()} The Unbound Minds Collective. All rights reserved.</p>
+              <Link to="/privacy" className="text-text-muted text-xs hover:text-accent transition-colors underline">Privacy Policy</Link>
+              <Link to="/terms" className="text-text-muted text-xs hover:text-accent transition-colors underline">Terms of Use</Link>
+            </div>
           </div>
         </div>
       </footer>
