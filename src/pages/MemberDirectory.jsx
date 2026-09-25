@@ -23,10 +23,12 @@ function getInterests(member) {
 }
 
 function MemberCard({ member }) {
+  const [expanded, setExpanded] = useState(false);
   const interests = getInterests(member);
   const displayName = member.display_name || member.name || 'Anonymous Member';
   const bio = member.bio || '';
-  const excerpt = bio.length > 100 ? bio.slice(0, 100) + '…' : bio;
+  const isLong = bio.length > 120;
+  const visibleBio = expanded || !isLong ? bio : bio.slice(0, 120) + '…';
 
   const since = member.created
     ? new Date(member.created).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
@@ -59,8 +61,18 @@ function MemberCard({ member }) {
         </div>
       )}
 
-      {excerpt && (
-        <p className="font-body text-sm text-text-secondary leading-relaxed">{excerpt}</p>
+      {bio && (
+        <div>
+          <p className="font-body text-sm text-text-secondary leading-relaxed">{visibleBio}</p>
+          {isLong && (
+            <button
+              onClick={() => setExpanded(e => !e)}
+              className="mt-1 text-xs font-medium text-accent hover:text-accent-hover transition-colors focus:outline-none"
+            >
+              {expanded ? 'Show less ↑' : 'Read more ↓'}
+            </button>
+          )}
+        </div>
       )}
     </div>
   );
