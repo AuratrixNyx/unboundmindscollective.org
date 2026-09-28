@@ -275,6 +275,13 @@ export default function SiteLayout() {
             </p>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3">
               <p className="text-text-muted text-xs">© {new Date().getFullYear()} The Unbound Minds Collective. All rights reserved.</p>
+              <p className="text-text-muted text-xs mt-1">
+                Content licensed under{' '}
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener noreferrer" className="underline hover:text-accent transition-colors">
+                  CC BY-NC-ND 4.0
+                </a>
+                {' '}— share freely with credit, not for commercial use, no derivatives.
+              </p>
               <Link to="/privacy" className="text-text-muted text-xs hover:text-accent transition-colors underline">Privacy Policy</Link>
               <Link to="/terms" className="text-text-muted text-xs hover:text-accent transition-colors underline">Terms of Use</Link>
             </div>
