@@ -6,12 +6,3 @@ harrier.log
 server.js
 dist-preview/
 .built
-.env
-.env.local
-.env.production
-.env.*.local
-*.log
-logs/
-.DS_Store
-Thumbs.db
-uploads/
