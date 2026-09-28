@@ -14,6 +14,49 @@ function formatDate(str) {
   return str ? new Date(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—';
 }
 
+// The live $35/month listing subscription (Stripe, livemode). v1 manual step:
+// after approving a listing the owner sends this link to the practitioner by
+// hand. Replace with a real checkout flow once payment-gating is decided — it
+// is admin-only and must never be placed on a public page.
+const LISTING_CHECKOUT_URL = 'https://buy.stripe.com/9B6dR92bJ6Lf5lK9dDbMQ00';
+
+function CheckoutLink({ url }) {
+  const [copied, setCopied] = useState(false);
+
+  // The clipboard API needs a secure context and a focused document; the
+  // selection fallback keeps the button working when either is missing.
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      return;
+    } catch (_) {}
+    const el = document.createElement('textarea');
+    el.value = url;
+    el.setAttribute('readonly', '');
+    el.style.position = 'fixed';
+    el.style.opacity = '0';
+    document.body.appendChild(el);
+    el.select();
+    try {
+      setCopied(document.execCommand('copy'));
+    } catch (_) {
+      setCopied(false);
+    }
+    document.body.removeChild(el);
+  };
+
+  return (
+    <div className="flex items-center gap-2 flex-wrap">
+      <a href={url} target="_blank" rel="noopener noreferrer" className="text-xs text-accent hover:underline break-all">{url}</a>
+      <button type="button" onClick={copyLink}
+        className="px-3 py-1.5 text-xs bg-raised border border-border text-text-secondary rounded-sm hover:bg-border transition-colors">
+        {copied ? 'Copied' : 'Copy link'}
+      </button>
+    </div>
+  );
+}
+
 export default function AdminDashboard() {
   const { user } = useAuth();
   const [tab, setTab] = useState('Members');
@@ -177,9 +220,9 @@ export default function AdminDashboard() {
 
   // Approving a listing publishes it in the public directory (the directory
   // reads active=true && approved=true). Declining leaves it unpublished.
-  // Note: no payment is taken anywhere yet — when the $35/month checkout
-  // exists, a listing should probably only be published once payment has
-  // cleared, which is a one-line change here.
+  // Note: approval takes no payment. The $35/month checkout link is surfaced on
+  // the approved listing below for the owner to send manually; whether approval
+  // should itself become payment-gated is an open owner decision.
   const handleListing = async (listingId, decision) => {
     try {
       await pb.collection('professional_listings').update(listingId, {
@@ -533,8 +576,9 @@ export default function AdminDashboard() {
               {pendingListings.length === 0
                 ? 'Nothing waiting on a decision right now.'
                 : `${pendingListings.length} waiting on a decision.`}{' '}
-              Approving publishes the listing in the public directory straight away. No payment is taken for a
-              listing yet — the $35/month checkout isn't built.
+              Approving publishes the listing in the public directory straight away, and takes no payment. The
+              $35/month checkout link for an approved listing appears on it below, for you to send to the
+              practitioner.
             </p>
             {listingApps.length === 0 ? (
               <p className="text-text-muted text-sm">No listing applications yet.</p>
@@ -577,6 +621,14 @@ export default function AdminDashboard() {
                         </button>
                       </div>
                     </div>
+                    {l.status === 'approved' && (
+                      <div className="mt-4 pt-4 border-t border-border">
+                        <p className="text-text-secondary text-sm mb-2">
+                          $35/month listing subscription — send this checkout link to the practitioner.
+                        </p>
+                        <CheckoutLink url={LISTING_CHECKOUT_URL} />
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
