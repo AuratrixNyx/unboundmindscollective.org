@@ -261,6 +261,8 @@ export default function SiteLayout() {
                 <Link to="/newsletter" className="text-sm text-text-secondary hover:text-accent transition-colors">Monthly Digest</Link>
                 <Link to="/facilitators" className="text-sm text-text-secondary hover:text-accent transition-colors">Facilitator Directory</Link>
                 <Link to="/facilitator-application" className="text-sm text-text-secondary hover:text-accent transition-colors">Facilitate a Session</Link>
+                <Link to="/contributor-programme" className="text-sm text-text-secondary hover:text-accent transition-colors">Contributor Programme</Link>
+                <Link to="/professional-directory" className="text-sm text-text-secondary hover:text-accent transition-colors">Professional Directory</Link>
                 <Link to="/auth" className="text-sm text-text-secondary hover:text-accent transition-colors">Join the Collective</Link>
               </div>
             </div>

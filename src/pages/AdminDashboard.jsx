@@ -7,7 +7,7 @@ import Plus from 'icon:plus';
 import CheckCircle from 'icon:check-circle';
 import X from 'icon:x';
 
-const TABS = ['Members', 'Moderation Queue', 'Invite Codes', 'Audit Log', 'Supporters', 'Suggestions'];
+const TABS = ['Members', 'Moderation Queue', 'Invite Codes', 'Audit Log', 'Supporters', 'Suggestions', 'Contributors'];
 const ROLES = ['member', 'moderator', 'facilitator', 'guest_facilitator', 'admin'];
 
 function formatDate(str) {
@@ -26,6 +26,8 @@ export default function AdminDashboard() {
   const [auditLog, setAuditLog] = useState([]);
   const [supporters, setSupporters] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const [contributorApps, setContributorApps] = useState([]);
+  const [volunteerApps, setVolunteerApps] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Password reset modal
@@ -76,6 +78,13 @@ export default function AdminDashboard() {
       } else if (t === 'Suggestions') {
         const r = await pb.collection('suggestions').getList(1, 100, { sort: '-created' });
         setSuggestions(r.items);
+      } else if (t === 'Contributors') {
+        const [ca, va] = await Promise.all([
+          pb.collection('contributor_applications').getList(1, 200, { sort: '-created' }),
+          pb.collection('volunteer_signups').getList(1, 200, { sort: '-created' }),
+        ]);
+        setContributorApps(ca.items);
+        setVolunteerApps(va.items);
       }
     } catch (_) {}
     setLoading(false);
@@ -405,6 +414,88 @@ export default function AdminDashboard() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {!loading && tab === 'Contributors' && (
+        <div className="space-y-8">
+          <div>
+            <h3 className="font-display text-lg text-text-primary mb-4">Paid & Volunteer Contributor Applications ({contributorApps.length})</h3>
+            {contributorApps.length === 0 ? (
+              <p className="text-text-muted text-sm">No applications yet.</p>
+            ) : (
+              <div className="space-y-3">
+                {contributorApps.map(a => (
+                  <div key={a.id} className="bg-surface border border-border rounded-sm p-5">
+                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
+                          <p className="text-text-primary font-medium">{a.name}</p>
+                          <span className={`text-xs px-2 py-0.5 rounded-sm border ${a.contributor_type === 'paid' ? 'bg-accent/10 text-accent border-accent/20' : 'bg-sage/10 text-sage border-sage/20'}`}>
+                            {a.contributor_type}
+                          </span>
+                          <span className={`text-xs px-2 py-0.5 rounded-sm border ${
+                            a.status === 'approved' ? 'bg-sage/10 text-sage border-sage/20' :
+                            a.status === 'declined' ? 'bg-danger/10 text-danger border-danger/20' :
+                            'bg-raised text-text-muted border-border'
+                          }`}>{a.status || 'pending'}</span>
+                        </div>
+                        <p className="text-text-muted text-xs mb-2">{a.email} · {formatDate(a.created)}</p>
+                        {a.lived_experience && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Lived experience:</strong> {a.lived_experience}</p>}
+                        {a.credentials && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Credentials:</strong> {a.credentials}</p>}
+                        {a.topic_areas && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Topics:</strong> {a.topic_areas}</p>}
+                        {a.availability && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Availability:</strong> {a.availability}</p>}
+                        {a.sample_work && <a href={a.sample_work} target="_blank" rel="noopener noreferrer" className="text-accent text-sm hover:underline">View sample work →</a>}
+                      </div>
+                      <select
+                        value={a.status || 'pending'}
+                        onChange={async e => {
+                          await pb.collection('contributor_applications').update(a.id, { status: e.target.value });
+                          fetchTab('Contributors');
+                        }}
+                        className="shrink-0 bg-raised border border-border rounded-sm px-2 py-1 text-text-secondary text-xs outline-hidden"
+                      >
+                        {['pending', 'approved', 'declined'].map(st => <option key={st} value={st}>{st}</option>)}
+                      </select>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div>
+            <h3 className="font-display text-lg text-text-primary mb-4">Volunteer Sign-ups ({volunteerApps.length})</h3>
+            {volunteerApps.length === 0 ? (
+              <p className="text-text-muted text-sm">No volunteer sign-ups yet.</p>
+            ) : (
+              <div className="space-y-3">
+                {volunteerApps.map(v => (
+                  <div key={v.id} className="bg-surface border border-border rounded-sm p-5">
+                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-text-primary font-medium mb-0.5">{v.name}</p>
+                        <p className="text-text-muted text-xs mb-2">{v.email} · {formatDate(v.created)}</p>
+                        {v.interests && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Interests:</strong> {v.interests}</p>}
+                        {v.skills && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Skills:</strong> {v.skills}</p>}
+                        {v.availability && <p className="text-text-secondary text-sm"><strong className="text-text-primary">Availability:</strong> {v.availability}</p>}
+                      </div>
+                      <select
+                        value={v.status || 'pending'}
+                        onChange={async e => {
+                          await pb.collection('volunteer_signups').update(v.id, { status: e.target.value });
+                          fetchTab('Contributors');
+                        }}
+                        className="shrink-0 bg-raised border border-border rounded-sm px-2 py-1 text-text-secondary text-xs outline-hidden"
+                      >
+                        {['pending', 'active', 'inactive'].map(st => <option key={st} value={st}>{st}</option>)}
+                      </select>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
 
