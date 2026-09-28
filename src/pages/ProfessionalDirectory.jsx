@@ -48,7 +48,7 @@ export default function ProfessionalDirectory() {
             Practitioners who see you fully.
           </h1>
           <p className="font-body text-text-secondary text-lg leading-relaxed max-w-2xl mx-auto">
-            Every professional listed here has been reviewed and approved by The Unbound Minds Collective.
+            Every listing here is sent in by the practitioner and read by a person before it appears.
             They bring subculture-informed, non-pathologizing practice to the communities we serve.
           </p>
         </div>
@@ -88,12 +88,12 @@ export default function ProfessionalDirectory() {
               </h2>
               <p className="font-body text-text-secondary mb-6">
                 {listings.length === 0
-                  ? 'We\'re currently reviewing applications from subculture-informed practitioners. Check back soon — or if you\'re a professional who\'d like to be listed, we\'d love to hear from you.'
+                  ? 'This directory is new and we\'re opening it to subculture-informed practitioners now. Check back soon — or if you\'re a professional who\'d like to be listed, we\'d love to hear from you.'
                   : 'Try a different filter, or browse all practitioners.'}
               </p>
               {listings.length === 0 ? (
                 <Link
-                  to="/contributor-programme"
+                  to="/listing-application"
                   className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-bg font-body font-semibold px-5 py-2.5 rounded-sm transition-colors text-sm"
                 >
                   Apply to be listed <ArrowRight className="w-4 h-4" />
@@ -173,18 +173,19 @@ export default function ProfessionalDirectory() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-2xl text-text-primary mb-3">Are you a subculture-informed practitioner?</h2>
           <p className="font-body text-text-secondary mb-6 max-w-xl mx-auto">
-            A listing in this directory puts you in front of exactly the communities you serve —
-            LGBTQ+, kink-aware, and ENM-informed clients actively looking for practitioners like you.
-            Listings are $35/month, reviewed and approved by our team.
+            A listing in this directory is for LGBTQ+, kink-aware, and ENM-informed people looking for a
+            practitioner who already understands the terrain. Listings are $35/month. The directory is new
+            and has no listings yet — we'd rather say that plainly than imply otherwise.
           </p>
           <Link
-            to="/contributor-programme"
+            to="/listing-application"
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-bg font-body font-semibold px-6 py-3 rounded-sm transition-colors"
           >
             Apply for a listing <ArrowRight className="w-4 h-4" />
           </Link>
           <p className="font-body text-xs text-text-muted mt-4">
-            Listing payment and management is handled through our partner platform. Apply here first — we'll be in touch with next steps.
+            The application form takes no payment. Send it first — a person reads it and replies, and the
+            $35/month listing is arranged with you directly afterwards.
           </p>
         </div>
       </section>

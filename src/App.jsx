@@ -24,6 +24,7 @@ import TermsOfUse from "./pages/TermsOfUse.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import ContributorProgram from "./pages/ContributorProgram.jsx";
 import ProfessionalDirectory from "./pages/ProfessionalDirectory.jsx";
+import ListingApplication from "./pages/ListingApplication.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -55,6 +56,7 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/contributor-programme" element={<ContributorProgram />} />
         <Route path="/professional-directory" element={<ProfessionalDirectory />} />
+        <Route path="/listing-application" element={<ListingApplication />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
