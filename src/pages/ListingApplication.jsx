@@ -449,7 +449,8 @@ export default function ListingApplication() {
         <Link to="/contributor-programme" className="underline hover:text-text-secondary">
           contributor programme
         </Link>{' '}
-        pays $50 per accepted piece and is a separate application.
+        is a separate application — the paid contributor programme isn't open yet, and volunteering there is how
+        people get involved today.
       </p>
     </div>
   );

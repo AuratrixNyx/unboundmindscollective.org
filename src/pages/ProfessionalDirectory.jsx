@@ -12,10 +12,10 @@ import Users from 'icon:users';
 const communityFilters = ['All', 'LGBTQ+', 'Kink/BDSM', 'ENM/Poly', 'Queer', 'Trans', 'Non-binary'];
 
 export default function ProfessionalDirectory() {
-  usePageMeta({
-    title: 'Professional Directory — The Unbound Minds Collective',
-    description: 'Find subculture-informed therapists, coaches, and professionals who respect and accurately reflect your lived experience. LGBTQ+, kink, and ENM-aware practitioners.',
-  });
+  usePageMeta(
+    'Professional Directory',
+    'Find subculture-informed therapists, coaches, and professionals who respect and accurately reflect your lived experience. LGBTQ+, kink, and ENM-aware practitioners.',
+  );
 
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
