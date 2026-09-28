@@ -17,4 +17,5 @@
   <url><loc>https://www.unboundmindscollective.org/search</loc><priority>0.5</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://www.unboundmindscollective.org/professional-directory</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.unboundmindscollective.org/contributor-programme</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.unboundmindscollective.org/listing-application</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>
