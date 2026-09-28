@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import { pb } from '../lib/pb.js';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import usePageMeta from '../hooks/usePageMeta.js';
@@ -57,17 +57,20 @@ const qualities = [
 ];
 
 export default function ContributorProgram() {
-  usePageMeta({
-    title: 'Contributor Programme — The Unbound Minds Collective',
-    description: 'Join as a paid or volunteer contributor. We center lived experience and subculture-informed knowledge — therapists, coaches, and community members all welcome.',
-  });
+  usePageMeta(
+    'Contributor Programme',
+    'Join as a paid or volunteer contributor. We center lived experience and subculture-informed knowledge — therapists, coaches, and community members all welcome.',
+  );
 
   const { user } = useAuth();
-  const [tab, setTab] = useState('paid');
+  const [searchParams] = useSearchParams();
+  // Recruitment links can point straight at the volunteer section; anything else keeps the paid default.
+  const initialTab = searchParams.get('tab') === 'volunteer' ? 'volunteer' : 'paid';
+  const [tab, setTab] = useState(initialTab);
   const [form, setForm] = useState({
     name: user?.display_name || user?.name || '',
     email: user?.email || '',
-    contributor_type: 'paid',
+    contributor_type: initialTab,
     lived_experience: '',
     credentials: '',
     topic_areas: '',
@@ -364,7 +367,7 @@ export default function ContributorProgram() {
           <h2 className="font-display text-2xl text-text-primary mb-3">Are you a therapist, coach, or professional?</h2>
           <p className="font-body text-text-secondary mb-6 max-w-xl mx-auto">
             Get listed in our professional directory — $35/month to be visible to exactly the communities you serve.
-            Payment and listing management is handled through our partner platform.
+            Online payment isn't switched on yet, so no card is charged today: send an application and a person reads it.
           </p>
           <Link
             to="/professional-directory"
