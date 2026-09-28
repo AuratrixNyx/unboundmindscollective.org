@@ -7,7 +7,8 @@ import Plus from 'icon:plus';
 import CheckCircle from 'icon:check-circle';
 import X from 'icon:x';
 
-const TABS = ['Members', 'Moderation Queue', 'Invite Codes', 'Audit Log', 'Supporters', 'Suggestions', 'Contributors'];
+const TABS = ['Members', 'Moderation Queue', 'Invite Codes', 'Audit Log', 'Supporters', 'Suggestions', 'Contributors', 'Listing Applications'];
+const STRIPE_CHECKOUT = 'https://buy.stripe.com/9B6dR92bJ6Lf5lK9dDbMQ00';
 const ROLES = ['member', 'moderator', 'facilitator', 'guest_facilitator', 'admin'];
 
 function formatDate(str) {
@@ -28,6 +29,7 @@ export default function AdminDashboard() {
   const [suggestions, setSuggestions] = useState([]);
   const [contributorApps, setContributorApps] = useState([]);
   const [volunteerApps, setVolunteerApps] = useState([]);
+  const [listingApps, setListingApps] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Password reset modal
@@ -85,6 +87,9 @@ export default function AdminDashboard() {
         ]);
         setContributorApps(ca.items);
         setVolunteerApps(va.items);
+      } else if (t === 'Listing Applications') {
+        const r = await pb.collection('professional_listings').getList(1, 200, { sort: '-created' });
+        setListingApps(r.items);
       }
     } catch (_) {}
     setLoading(false);
@@ -490,6 +495,61 @@ export default function AdminDashboard() {
                       >
                         {['pending', 'active', 'inactive'].map(st => <option key={st} value={st}>{st}</option>)}
                       </select>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Listing Applications Tab */}
+      {!loading && tab === 'Listing Applications' && (
+        <div className="space-y-4">
+          <div className="bg-surface border border-border rounded-sm p-6">
+            <h3 className="font-display text-lg text-text-primary mb-1">Professional Listing Applications ({listingApps.length})</h3>
+            <p className="font-body text-xs text-text-muted mb-4">Once you approve an application, send the practitioner the Stripe payment link so they can activate their $35/month listing.</p>
+            {listingApps.length === 0 ? (
+              <p className="font-body text-sm text-text-muted">No applications yet.</p>
+            ) : (
+              <div className="space-y-4">
+                {listingApps.map(a => (
+                  <div key={a.id} className="bg-raised border border-border rounded-sm p-4">
+                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                      <div className="flex-1 min-w-0">
+                        <p className="font-body font-semibold text-text-primary">{a.name}</p>
+                        {a.title && <p className="font-body text-sm text-text-secondary">{a.title}</p>}
+                        {a.contact_email && <p className="font-body text-xs text-text-muted mt-0.5">{a.contact_email}</p>}
+                        {a.communities_served && <p className="font-body text-xs text-text-muted mt-1">Communities: {a.communities_served}</p>}
+                        {a.credentials && <p className="font-body text-xs text-text-muted">Credentials: {a.credentials}</p>}
+                        {a.bio && <p className="font-body text-xs text-text-secondary mt-2 line-clamp-3">{a.bio}</p>}
+                      </div>
+                      <div className="flex flex-col gap-2 items-end shrink-0">
+                        <select
+                          value={a.status || 'pending'}
+                          onChange={async e => {
+                            await pb.collection('professional_listings').update(a.id, {
+                              status: e.target.value,
+                              approved: e.target.value === 'approved',
+                            });
+                            fetchTab('Listing Applications');
+                          }}
+                          className="bg-raised border border-border rounded-sm px-2 py-1 text-text-secondary text-xs outline-hidden"
+                        >
+                          {['pending', 'approved', 'declined'].map(st => <option key={st} value={st}>{st}</option>)}
+                        </select>
+                        {(a.status === 'approved' || a.approved) && (
+                          <a
+                            href={STRIPE_CHECKOUT}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs bg-accent text-bg px-3 py-1.5 rounded-sm font-body font-semibold hover:bg-accent-hover transition-colors"
+                          >
+                            Send payment link →
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}

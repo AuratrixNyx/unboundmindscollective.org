@@ -15,28 +15,28 @@ const paidRoles = [
     icon: BookOpen,
     title: 'Article Contributor',
     description: 'Write in-depth pieces on lived experience, community knowledge, or topics relevant to LGBTQ+, kink, and ENM communities.',
-    pay: '$50 per accepted piece',
+    pay: 'Paid contributor — details on acceptance',
     length: '800–2,000 words',
   },
   {
     icon: Heart,
     title: 'Peer Guide Author',
     description: 'Create practical, community-grounded guides that help members navigate complex personal terrain with dignity.',
-    pay: '$50 per accepted piece',
+    pay: 'Paid contributor — details on acceptance',
     length: '1,000–2,000 words',
   },
   {
     icon: Star,
     title: 'Resource Reviewer',
     description: 'Evaluate and write up external resources — books, organisations, tools — through a subculture-informed lens.',
-    pay: '$50 per accepted piece',
+    pay: 'Paid contributor — details on acceptance',
     length: '500–800 words',
   },
   {
     icon: Users,
     title: 'Topic Leader',
     description: 'Own a recurring topic area, curate conversations, and shape how the community explores a subject over time.',
-    pay: '$50 per accepted piece',
+    pay: 'Paid contributor — details on acceptance',
     length: 'Ongoing',
   },
 ];
@@ -364,7 +364,7 @@ export default function ContributorProgram() {
           <h2 className="font-display text-2xl text-text-primary mb-3">Are you a therapist, coach, or professional?</h2>
           <p className="font-body text-text-secondary mb-6 max-w-xl mx-auto">
             Get listed in our professional directory — $35/month to be visible to exactly the communities you serve.
-            Payment and listing management is handled through our partner platform.
+            Apply first — once reviewed, we'll be in touch with next steps.
           </p>
           <Link
             to="/professional-directory"

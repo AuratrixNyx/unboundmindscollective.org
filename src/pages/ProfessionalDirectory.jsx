@@ -48,8 +48,8 @@ export default function ProfessionalDirectory() {
             Practitioners who see you fully.
           </h1>
           <p className="font-body text-text-secondary text-lg leading-relaxed max-w-2xl mx-auto">
-            Every professional listed here has been reviewed and approved by The Unbound Minds Collective.
-            They bring subculture-informed, non-pathologizing practice to the communities we serve.
+            Practitioners listed here bring subculture-informed, non-pathologizing practice to the communities we serve —
+            people who accurately reflect your lived experience without judgment.
           </p>
         </div>
       </section>
@@ -173,19 +173,15 @@ export default function ProfessionalDirectory() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-2xl text-text-primary mb-3">Are you a subculture-informed practitioner?</h2>
           <p className="font-body text-text-secondary mb-6 max-w-xl mx-auto">
-            A listing in this directory puts you in front of exactly the communities you serve —
-            LGBTQ+, kink-aware, and ENM-informed clients actively looking for practitioners like you.
-            Listings are $35/month, reviewed and approved by our team.
+            A listing puts you in front of LGBTQ+, kink-aware, and ENM-informed people looking for practitioners
+            who understand their lives. Listings are $35/month after your application is reviewed.
           </p>
           <Link
-            to="/contributor-programme"
+            to="/listing-application"
             className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-bg font-body font-semibold px-6 py-3 rounded-sm transition-colors"
           >
             Apply for a listing <ArrowRight className="w-4 h-4" />
           </Link>
-          <p className="font-body text-xs text-text-muted mt-4">
-            Listing payment and management is handled through our partner platform. Apply here first — we'll be in touch with next steps.
-          </p>
         </div>
       </section>
     </div>
