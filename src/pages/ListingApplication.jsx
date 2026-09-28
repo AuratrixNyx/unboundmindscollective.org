@@ -413,33 +413,30 @@ export default function ListingApplication() {
         </form>
       </div>
 
-      {/* ── PAYMENT INTEGRATION POINT — INERT. NO CHECKOUT EXISTS YET. ─────────
-          REPLACE-ME when the $35/month checkout is built.
-          There is no Stripe account, no product, no price, and no payment code
-          connected to this business yet, so nothing here can charge anyone.
-          When checkout exists, wire it here (one place only, never on a
-          care-facing page) and, on a successful subscription, flip the listing
-          to active=true — the admin approval path currently sets active itself.
-          Until then this button stays disabled: no paywall, no dead-end
-          redirect, no placeholder link to a checkout that doesn't exist.       */}
+      {/* ── PAYMENT INTEGRATION POINT ──────────────────────────────────────────
+          The $35/month checkout link exists in Stripe, but it deliberately is
+          NOT on this page: a listing is only offered it after a person has read
+          the application and approved it. The live link sits on approved
+          listings in the admin Listings tab, for the owner to send to the
+          practitioner by hand. If checkout is ever wired in here, keep it to
+          this one place (never on a care-facing page) and, on a successful
+          subscription, flip the listing to active=true — the admin approval
+          path currently sets active itself.
+          Nothing here collects payment details or can charge anyone.         */}
       <div
         data-umc-integration-point="listing-checkout"
         className="mt-10 bg-raised border border-border rounded-sm p-6"
       >
-        <h2 className="font-display text-xl text-text-primary mb-2">$35/month payment — not switched on yet</h2>
+        <h2 className="font-display text-xl text-text-primary mb-2">How the $35/month works</h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
-          We're still connecting our checkout, so we can't take a listing payment online right now. That's on us,
-          not on you: applying above costs nothing, and if you'd like to be listed we'll arrange the $35/month
-          with you directly once your application has been read.
+          Applying costs nothing, and this page doesn't take a payment. The owner reads every application by hand
+          — that's what makes this directory worth anything. If your application is approved, your listing goes
+          into the public directory and we send you the $35/month checkout link, so you can subscribe whenever
+          you're ready.
         </p>
-        <button
-          type="button"
-          disabled
-          aria-disabled="true"
-          className="px-5 py-2.5 bg-raised border border-border text-text-muted text-sm rounded-sm cursor-not-allowed opacity-70"
-        >
-          Pay $35/month — available once checkout is connected
-        </button>
+        <p className="text-text-muted text-xs leading-relaxed">
+          No payment details are collected here, and nothing on this page can charge you.
+        </p>
       </div>
 
       {/* Keeping the two paid routes apart on purpose */}

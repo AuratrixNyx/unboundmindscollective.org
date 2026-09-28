@@ -375,7 +375,8 @@ export default function ContributorProgram() {
           <h2 className="font-display text-2xl text-text-primary mb-3">Are you a therapist, coach, or professional?</h2>
           <p className="font-body text-text-secondary mb-6 max-w-xl mx-auto">
             Get listed in our professional directory — $35/month to be visible to exactly the communities you serve.
-            Online payment isn't switched on yet, so no card is charged today: send an application and a person reads it.
+            No card is charged on this site: send an application, a person reads it, and an approved listing is
+            sent the $35/month checkout link.
           </p>
           <Link
             to="/professional-directory"
