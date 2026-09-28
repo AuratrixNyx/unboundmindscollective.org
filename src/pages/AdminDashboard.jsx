@@ -7,7 +7,7 @@ import Plus from 'icon:plus';
 import CheckCircle from 'icon:check-circle';
 import X from 'icon:x';
 
-const TABS = ['Members', 'Moderation Queue', 'Invite Codes', 'Audit Log', 'Supporters', 'Suggestions', 'Contributors'];
+const TABS = ['Members', 'Moderation Queue', 'Invite Codes', 'Audit Log', 'Supporters', 'Suggestions', 'Contributors', 'Listings'];
 const ROLES = ['member', 'moderator', 'facilitator', 'guest_facilitator', 'admin'];
 
 function formatDate(str) {
@@ -28,6 +28,7 @@ export default function AdminDashboard() {
   const [suggestions, setSuggestions] = useState([]);
   const [contributorApps, setContributorApps] = useState([]);
   const [volunteerApps, setVolunteerApps] = useState([]);
+  const [listingApps, setListingApps] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Password reset modal
@@ -85,6 +86,9 @@ export default function AdminDashboard() {
         ]);
         setContributorApps(ca.items);
         setVolunteerApps(va.items);
+      } else if (t === 'Listings') {
+        const r = await pb.collection('professional_listings').getList(1, 200, { sort: '-created' });
+        setListingApps(r.items);
       }
     } catch (_) {}
     setLoading(false);
@@ -170,6 +174,26 @@ export default function AdminDashboard() {
       fetchTab('Suggestions');
     } catch (_) {}
   };
+
+  // Approving a listing publishes it in the public directory (the directory
+  // reads active=true && approved=true). Declining leaves it unpublished.
+  // Note: no payment is taken anywhere yet — when the $35/month checkout
+  // exists, a listing should probably only be published once payment has
+  // cleared, which is a one-line change here.
+  const handleListing = async (listingId, decision) => {
+    try {
+      await pb.collection('professional_listings').update(listingId, {
+        status: decision,
+        approved: decision === 'approved',
+        active: decision === 'approved',
+        reviewed_by: user.id,
+      });
+      await pb.collection('audit_log').create({ action: `listing_${decision}`, target_id: listingId, performed_by: user.id });
+      fetchTab('Listings');
+    } catch (_) {}
+  };
+
+  const pendingListings = listingApps.filter(l => (l.status || 'pending') === 'pending');
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -490,6 +514,68 @@ export default function AdminDashboard() {
                       >
                         {['pending', 'active', 'inactive'].map(st => <option key={st} value={st}>{st}</option>)}
                       </select>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {!loading && tab === 'Listings' && (
+        <div className="space-y-8">
+          <div>
+            <h3 className="font-display text-lg text-text-primary mb-1">
+              Professional Listing Applications ({listingApps.length})
+            </h3>
+            <p className="text-text-muted text-sm mb-4">
+              {pendingListings.length === 0
+                ? 'Nothing waiting on a decision right now.'
+                : `${pendingListings.length} waiting on a decision.`}{' '}
+              Approving publishes the listing in the public directory straight away. No payment is taken for a
+              listing yet — the $35/month checkout isn't built.
+            </p>
+            {listingApps.length === 0 ? (
+              <p className="text-text-muted text-sm">No listing applications yet.</p>
+            ) : (
+              <div className="space-y-3">
+                {listingApps.map(l => (
+                  <div key={l.id} className="bg-surface border border-border rounded-sm p-5">
+                    <div className="flex items-start justify-between gap-4 flex-wrap">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
+                          <p className="text-text-primary font-medium">{l.name}</p>
+                          {l.title && <span className="text-accent text-sm">{l.title}</span>}
+                          <span className={`text-xs px-2 py-0.5 rounded-sm border ${
+                            l.status === 'approved' ? 'bg-sage/10 text-sage border-sage/20' :
+                            l.status === 'declined' ? 'bg-danger/10 text-danger border-danger/20' :
+                            'bg-raised text-text-muted border-border'
+                          }`}>{l.status || 'pending'}</span>
+                        </div>
+                        <p className="text-text-muted text-xs mb-2">{l.contact_email} · {formatDate(l.created)}</p>
+                        {l.credentials && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Credentials:</strong> {l.credentials}</p>}
+                        {l.credentials_detail && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Background:</strong> {l.credentials_detail}</p>}
+                        {l.communities_served && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Communities served:</strong> {l.communities_served}</p>}
+                        {(l.location || l.virtual_available) && (
+                          <p className="text-text-secondary text-sm mb-1">
+                            <strong className="text-text-primary">Location:</strong> {l.location || 'Not given'}
+                            {l.virtual_available ? ' · remote sessions offered' : ''}
+                          </p>
+                        )}
+                        {l.bio && <p className="text-text-secondary text-sm mb-1"><strong className="text-text-primary">Bio:</strong> {l.bio}</p>}
+                        {l.website && <a href={l.website} target="_blank" rel="noopener noreferrer" className="text-accent text-sm hover:underline">Visit website →</a>}
+                      </div>
+                      <div className="flex gap-2 shrink-0">
+                        <button onClick={() => handleListing(l.id, 'approved')}
+                          className="px-3 py-1.5 text-xs bg-sage/10 border border-sage/30 text-sage rounded-sm hover:bg-sage/20 flex items-center gap-1">
+                          <CheckCircle size={12} /> Approve
+                        </button>
+                        <button onClick={() => handleListing(l.id, 'declined')}
+                          className="px-3 py-1.5 text-xs bg-danger/10 border border-danger/30 text-danger rounded-sm hover:bg-danger/20 flex items-center gap-1">
+                          <X size={12} /> Decline
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
