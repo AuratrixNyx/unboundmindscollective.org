@@ -10,33 +10,31 @@ import BookOpen from 'icon:book-open';
 import CheckCircle from 'icon:check-circle';
 import ArrowRight from 'icon:arrow-right';
 
-const paidRoles = [
+// The pieces we want to publish. The paid contributor programme is on hold until
+// the site is earning, so nothing here is advertised as paid work today.
+const contributorRoles = [
   {
     icon: BookOpen,
     title: 'Article Contributor',
     description: 'Write in-depth pieces on lived experience, community knowledge, or topics relevant to LGBTQ+, kink, and ENM communities.',
-    pay: '$50 per accepted piece',
     length: '800–2,000 words',
   },
   {
     icon: Heart,
     title: 'Peer Guide Author',
     description: 'Create practical, community-grounded guides that help members navigate complex personal terrain with dignity.',
-    pay: '$50 per accepted piece',
     length: '1,000–2,000 words',
   },
   {
     icon: Star,
     title: 'Resource Reviewer',
     description: 'Evaluate and write up external resources — books, organisations, tools — through a subculture-informed lens.',
-    pay: '$50 per accepted piece',
     length: '500–800 words',
   },
   {
     icon: Users,
     title: 'Topic Leader',
     description: 'Own a recurring topic area, curate conversations, and shape how the community explores a subject over time.',
-    pay: '$50 per accepted piece',
     length: 'Ongoing',
   },
 ];
@@ -59,13 +57,14 @@ const qualities = [
 export default function ContributorProgram() {
   usePageMeta(
     'Contributor Programme',
-    'Join as a paid or volunteer contributor. We center lived experience and subculture-informed knowledge — therapists, coaches, and community members all welcome.',
+    'Volunteer with The Unbound Minds Collective — we center lived experience and subculture-informed knowledge. Therapists, coaches, and community members are all welcome. The paid contributor programme is not open yet.',
   );
 
   const { user } = useAuth();
   const [searchParams] = useSearchParams();
-  // Recruitment links can point straight at the volunteer section; anything else keeps the paid default.
-  const initialTab = searchParams.get('tab') === 'volunteer' ? 'volunteer' : 'paid';
+  // Paying contributors is on hold, so volunteering is the open path and the
+  // default; ?tab=paid still works for anyone registering interest in paid work.
+  const initialTab = searchParams.get('tab') === 'paid' ? 'paid' : 'volunteer';
   const [tab, setTab] = useState(initialTab);
   const [form, setForm] = useState({
     name: user?.display_name || user?.name || '',
@@ -113,20 +112,22 @@ export default function ContributorProgram() {
             Your knowledge belongs here.
           </h1>
           <p className="font-body text-text-secondary text-lg leading-relaxed max-w-2xl mx-auto">
-            The Unbound Minds Collective is built by and for the communities it serves. We pay people with lived experience
-            and subculture-informed knowledge to create content that accurately reflects our communities — because that knowledge is real work.
+            The Unbound Minds Collective is built by and for the communities it serves. Lived experience and
+            subculture-informed knowledge are what make this space accurate and real — and paying people for that work
+            is the plan for this place. The paid contributor programme isn't open yet: it opens when the site is earning.
+            Until then, volunteering is how people get involved, and that's open right now.
           </p>
         </div>
       </section>
 
-      {/* Pricing callout */}
+      {/* Programme status */}
       <section className="py-10 px-4 bg-bg">
         <div className="max-w-3xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-surface border border-border rounded-sm p-6 text-center">
-              <p className="font-body text-text-muted text-sm uppercase tracking-wider mb-2">Paid contributor piece</p>
-              <p className="font-display text-4xl text-accent font-bold">$50</p>
-              <p className="font-body text-text-secondary text-sm mt-2">per accepted article, guide, or review</p>
+              <p className="font-body text-text-muted text-sm uppercase tracking-wider mb-2">Paid contributor programme</p>
+              <p className="font-display text-2xl text-text-primary font-bold">Not open yet</p>
+              <p className="font-body text-text-secondary text-sm mt-2">It opens when the site is earning. Volunteering is open now.</p>
             </div>
             <div className="bg-surface border border-border rounded-sm p-6 text-center">
               <p className="font-body text-text-muted text-sm uppercase tracking-wider mb-2">Professional listing</p>
@@ -135,7 +136,7 @@ export default function ContributorProgram() {
             </div>
           </div>
           <p className="font-body text-text-muted text-sm text-center mt-4">
-            Revenue from professional listings funds contributor pay. Members always access peer support for free.
+            Listing revenue is what would fund contributor pay. Members always access peer support for free.
           </p>
         </div>
       </section>
@@ -162,20 +163,22 @@ export default function ContributorProgram() {
         </div>
       </section>
 
-      {/* Paid roles */}
+      {/* Contributor roles */}
       <section className="py-12 px-4 bg-bg border-t border-border">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-2xl text-text-primary mb-2">Paid contributor roles</h2>
-          <p className="font-body text-text-secondary mb-8">Each accepted piece earns $50, regardless of type.</p>
+          <h2 className="font-display text-2xl text-text-primary mb-2">Contributor roles we're building</h2>
+          <p className="font-body text-text-secondary mb-8">
+            These are the kinds of pieces this space needs. The paid contributor programme isn't open yet — it opens
+            when the site is earning — so nothing here is offered as paid work today, and we'd rather say that plainly
+            than advertise a rate the business can't currently honour.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {paidRoles.map((role) => (
+            {contributorRoles.map((role) => (
               <div key={role.title} className="bg-surface border border-border rounded-sm p-5">
                 <role.icon className="w-5 h-5 text-accent mb-3" />
                 <h3 className="font-body font-semibold text-text-primary mb-2">{role.title}</h3>
                 <p className="font-body text-text-secondary text-sm leading-relaxed mb-3">{role.description}</p>
                 <div className="flex gap-4 text-xs text-text-muted font-body">
-                  <span>{role.pay}</span>
-                  <span>·</span>
                   <span>{role.length}</span>
                 </div>
               </div>
@@ -187,10 +190,10 @@ export default function ContributorProgram() {
       {/* Volunteer roles */}
       <section className="py-12 px-4 bg-surface border-t border-border">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-display text-2xl text-text-primary mb-2">Volunteer roles</h2>
+          <h2 className="font-display text-2xl text-text-primary mb-2">Volunteer roles — open now</h2>
           <p className="font-body text-text-secondary mb-8">
-            Unpaid volunteer roles are kept entirely separate from paid ones — no one is misled about compensation.
-            Volunteering here is about showing up for the community, not replacing paid work.
+            Volunteer roles are unpaid, and labelled that way — no one is misled about compensation. The paid
+            contributor programme isn't open yet, so this is how people get involved right now.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {volunteerRoles.map((role) => (
@@ -207,8 +210,13 @@ export default function ContributorProgram() {
       <section className="py-16 px-4 bg-bg border-t border-border">
         <div className="max-w-2xl mx-auto">
           <h2 className="font-display text-2xl text-text-primary mb-2">Apply to contribute</h2>
-          <p className="font-body text-text-secondary mb-8">
+          <p className="font-body text-text-secondary mb-4">
             Tell us about yourself. There's no wrong way to answer — we read every application with care.
+          </p>
+          <p className="font-body text-text-secondary text-sm mb-8">
+            Volunteering is open now. If you'd like to be considered for paid work when the paid contributor
+            programme opens, use the paid tab and we'll keep your details on file — there's no rate to quote and no
+            date to promise today, and asking commits you to nothing.
           </p>
 
           {success ? (
@@ -228,14 +236,14 @@ export default function ContributorProgram() {
                   onClick={() => handleTab('paid')}
                   className={`flex-1 py-2.5 text-sm font-body font-medium transition-colors ${tab === 'paid' ? 'bg-accent text-bg' : 'bg-surface text-text-secondary hover:bg-raised'}`}
                 >
-                  Paid contributor
+                  Paid — not open yet
                 </button>
                 <button
                   type="button"
                   onClick={() => handleTab('volunteer')}
                   className={`flex-1 py-2.5 text-sm font-body font-medium transition-colors ${tab === 'volunteer' ? 'bg-accent text-bg' : 'bg-surface text-text-secondary hover:bg-raised'}`}
                 >
-                  Volunteer
+                  Volunteer — open now
                 </button>
               </div>
 
